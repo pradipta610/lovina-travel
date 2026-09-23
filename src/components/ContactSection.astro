@@ -1,0 +1,15 @@
+---
+import { ArrowUpRight, Clock3, MapPin } from 'lucide-astro';
+---
+<section class="contact section-pad" id="contact">
+  <div class="wrap contact-head reveal"><p class="eyebrow">Come north</p><h2 class="display">Your slower Bali<br />starts <em>here.</em></h2><a class="circle-link" href="https://wa.me/6281234567890" aria-label="Talk with our local team"><ArrowUpRight size={28} stroke-width={1.2}/></a></div>
+  <div class="wrap contact-info reveal">
+    <div><MapPin size={18} stroke-width={1.4}/><span class="eyebrow">Find us</span><p>Lovina Beach<br/>North Bali, Indonesia</p></div>
+    <div><Clock3 size={18} stroke-width={1.4}/><span class="eyebrow">Every day</span><p>07:00 — 19:00<br/>Private trips by appointment</p></div>
+    <div class="contact-cta"><p>Have a date in mind?</p><a class="btn" href="https://wa.me/6281234567890">Talk with our local team <ArrowUpRight size={15}/></a></div>
+  </div>
+</section>
+<style>
+  .contact{border-top:1px solid var(--sand)}.contact-head{display:grid;grid-template-columns:1fr 3fr auto;gap:2rem;align-items:center}.contact h2{font-size:clamp(4.1rem,9vw,9.5rem);margin:0}.circle-link{width:88px;height:88px;border:1px solid var(--ocean);border-radius:50%;display:grid;place-items:center;transition:.35s}.circle-link:hover{background:var(--ocean);color:var(--white);transform:rotate(45deg)}.contact-info{border-top:1px solid var(--sand);margin-top:6rem;padding-top:2rem;display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:3rem}.contact-info>div{display:grid;grid-template-columns:28px 1fr;gap:.7rem}.contact-info p{grid-column:2;line-height:1.7;margin:0;font-size:.85rem}.contact-cta{display:flex!important;align-items:center;justify-content:flex-end}.contact-cta p{font-family:var(--serif);font-size:1.35rem}.contact-cta .btn{white-space:nowrap}
+  @media(max-width:850px){.contact-head{grid-template-columns:1fr auto}.contact-head>.eyebrow{grid-column:1/-1}.contact-head h2{font-size:3.9rem}.circle-link{width:64px;height:64px}.contact-info{grid-template-columns:1fr;gap:2rem}.contact-cta{align-items:flex-start!important}.contact-cta .btn{width:100%}}
+</style>

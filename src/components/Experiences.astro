@@ -1,0 +1,18 @@
+---
+import ExperienceCard from './ExperienceCard.astro';
+const experiences = [
+ {number:'01',title:'Dolphin Sunrise',category:'Ocean · Morning',price:'From €85',description:'Meet the day on calm water, in a small local boat.',image:'/images/dolphin-journey.png',position:'49% center'},
+ {number:'02',title:'Hidden Waterfalls',category:'Wild · Restorative',price:'From €95',description:'Follow the quiet paths into North Bali’s living green.',image:'/images/hidden-waterfall.png',position:'center'},
+ {number:'03',title:'North Bali Escape',category:'Nature · Culture',price:'From €120',description:'A full day shaped around the north, never a checklist.',image:'/images/lovina-sunrise.png',position:'72% center'},
+ {number:'04',title:'Coastal Slow Days',category:'Local · Unhurried',price:'From €75',description:'Salt air, unmarked stops, and nowhere else to be.',image:'/images/dolphin-journey.png',position:'15% center'}
+];
+---
+<section class="section-pad experiences" id="experiences">
+  <div class="wrap section-head reveal"><p class="eyebrow">The experiences</p><h2 class="display">Four ways to<br /><em>move more slowly.</em></h2><p class="intro">Small groups, local knowledge, and enough space for the unexpected.</p></div>
+  <div class="cards wrap">{experiences.map((item) => <ExperienceCard {...item} />)}</div>
+</section>
+<style>
+  .section-head{display:grid;grid-template-columns:1fr 2fr 1fr;align-items:end;margin-bottom:4.5rem}.section-head h2{font-size:clamp(3.3rem,6vw,6.5rem);margin:0}.intro{font-size:.9rem;line-height:1.7;max-width:30ch;margin:0 0 .6rem auto}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+  @media(max-width:1023px){.section-head{grid-template-columns:1fr 2fr}.intro{display:none}.cards{grid-template-columns:repeat(2,1fr);gap:3rem 1.25rem}}
+  @media(max-width:767px){.section-head{display:block;margin-bottom:3rem}.section-head .eyebrow{margin-bottom:1.2rem}.section-head h2{font-size:3.6rem}.cards{display:flex;overflow:auto;scroll-snap-type:x mandatory;gap:1rem;padding-right:1.5rem;width:100%;margin-left:1rem}.cards>*{scroll-snap-align:start}.cards::-webkit-scrollbar{display:none}}
+</style>

@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ArrowLeft, ArrowRight, Clock3 } from 'lucide-astro';
+import { posts, type Post } from '../../data/posts';
+
+export function getStaticPaths() { return posts.map((post) => ({ params: { slug: post.slug }, props: { post } })); }
+interface Props { post: Post }
+const { post } = Astro.props;
+---
+<BaseLayout title={`${post.title} — Lovina Travel`} description={post.excerpt}>
+  <header class="article-nav shell"><a href="/blog"><ArrowLeft size={14}/> Journal</a><a class="brand" href="/">Lovina Travel</a><a href="/#tours">Plan a trip <ArrowRight size={14}/></a></header>
+  <main>
+    <article>
+      <header class="article-head shell"><p class="kicker">{post.category}</p><h1>{post.title}</h1><div><span>{post.date}</span><span><Clock3 size={13}/>{post.readTime}</span></div></header>
+      <div class="hero-image shell"><img src={post.image} alt={post.alt}/></div>
+      <div class="article-body">{post.body.map((paragraph) => <p>{paragraph}</p>)}<aside><p>Planning a morning in Lovina?</p><a href="/#tours">See our sea tours <ArrowRight size={14}/></a></aside></div>
+    </article>
+  </main>
+  <footer><a href="/blog"><ArrowLeft size={14}/> More stories from North Bali</a></footer>
+</BaseLayout>
+<style>
+  .article-nav{height:80px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;border-bottom:1px solid var(--line);font-size:.7rem}.article-nav>a{display:flex;align-items:center;gap:.45rem}.article-nav>a:last-child{justify-self:end}.brand{font-weight:600;font-size:.85rem}.article-head{max-width:980px;padding:clamp(5rem,10vw,9rem) 0 4rem;text-align:center}.article-head h1{font-size:clamp(3.5rem,8vw,7.8rem);font-weight:400;line-height:.92;letter-spacing:-.065em;margin:1.5rem auto 2rem}.article-head>div{display:flex;justify-content:center;gap:1.5rem;color:var(--muted);font-size:.68rem}.article-head>div span{display:flex;align-items:center;gap:.4rem}.hero-image{height:min(70vw,760px);border-radius:1rem;overflow:hidden}.hero-image img{height:100%;object-fit:cover}.article-body{width:min(100% - 2rem,680px);margin:5rem auto 8rem}.article-body>p{font-size:1.08rem;line-height:1.9;color:#3f5557;margin:0 0 1.8rem}.article-body>p:first-child::first-letter{float:left;font-size:4.8rem;line-height:.8;padding:.15rem .55rem 0 0;color:var(--ink)}aside{margin-top:4rem;padding:2rem;border-radius:1rem;background:var(--mist)}aside p{font-size:1.4rem;margin:0 0 1rem}aside a{display:flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;width:max-content}footer{padding:2rem;background:var(--ink);color:var(--white);display:flex;justify-content:center}footer a{display:flex;align-items:center;gap:.5rem;font-size:.7rem}
+  @media(max-width:620px){.article-nav{grid-template-columns:1fr auto}.article-nav .brand{display:none}.article-head{padding:4.5rem 1rem 3rem}.article-head h1{font-size:3.7rem}.hero-image{width:calc(100% - 2rem);height:58svh}.article-body{margin:3.5rem auto 5rem}}
+</style>

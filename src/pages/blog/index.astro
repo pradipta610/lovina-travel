@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ArrowLeft, ArrowRight, Clock3 } from 'lucide-astro';
+import { posts } from '../../data/posts';
+const [featured, ...morePosts] = posts;
+---
+<BaseLayout title="Journal — Lovina Travel" description="Simple notes for planning a slower trip through Lovina and North Bali.">
+  <header class="blog-nav shell"><a class="brand" href="/"><span>L</span><strong>Lovina Travel<small>North Bali</small></strong></a><a class="back" href="/"><ArrowLeft size={14}/> Back to home</a></header>
+  <main>
+    <section class="journal-head shell"><p class="kicker">The journal</p><h1>Notes from<br/>North Bali.</h1><p>Practical guides, quiet places, and a little context for travelling around Lovina.</p></section>
+    <section class="featured shell">
+      <a class="feature-image" href={`/blog/${featured.slug}`}><img src={featured.image} alt={featured.alt}/></a>
+      <div class="feature-copy"><p class="meta">{featured.category} · {featured.date}</p><h2><a href={`/blog/${featured.slug}`}>{featured.title}</a></h2><p>{featured.excerpt}</p><a class="read" href={`/blog/${featured.slug}`}>Read story <ArrowRight size={14}/></a></div>
+    </section>
+    <section class="post-grid shell">
+      {morePosts.map((post) => <article><a class="card-image" href={`/blog/${post.slug}`}><img src={post.image} alt={post.alt} loading="lazy"/></a><p class="meta">{post.category} · {post.date}</p><h2><a href={`/blog/${post.slug}`}>{post.title}</a></h2><p>{post.excerpt}</p><span><Clock3 size={13}/>{post.readTime}</span></article>)}
+    </section>
+  </main>
+  <footer><div class="shell"><span>© 2026 Lovina Travel</span><a href="/">Plan your Lovina trip <ArrowRight size={14}/></a></div></footer>
+</BaseLayout>
+<style>
+  .blog-nav{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:.65rem}.brand>span{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--white);font-weight:600}.brand strong{font-size:.82rem}.brand small{display:block;color:var(--muted);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase}.back,.read{display:flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:500}.journal-head{padding:clamp(5rem,10vw,9rem) 0}.journal-head h1{font-size:clamp(4rem,10vw,9rem);font-weight:400;line-height:.82;letter-spacing:-.075em;margin:1.5rem 0 2rem}.journal-head>p:last-child{max-width:43ch;color:var(--muted);line-height:1.7}.featured{display:grid;grid-template-columns:1.35fr .65fr;gap:clamp(2rem,6vw,6rem);align-items:center;padding-bottom:7rem}.feature-image{height:600px;border-radius:1rem;overflow:hidden}.feature-image img,.card-image img{height:100%;object-fit:cover;transition:transform .7s ease}.feature-image:hover img,.card-image:hover img{transform:scale(1.025)}.meta{font-size:.64rem!important;letter-spacing:.1em;text-transform:uppercase;color:var(--sea)!important}.feature-copy h2{font-size:clamp(2.4rem,5vw,4.8rem);font-weight:400;line-height:1;letter-spacing:-.055em;margin:1.2rem 0}.feature-copy>p:not(.meta),article>p:not(.meta){color:var(--muted);line-height:1.7;font-size:.86rem}.read{margin-top:2rem;width:max-content;border-bottom:1px solid;padding-bottom:.35rem}.post-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;padding-bottom:8rem}.post-grid article{padding-bottom:2rem;border-bottom:1px solid var(--line)}.card-image{display:block;height:360px;border-radius:.8rem;overflow:hidden;margin-bottom:1.5rem}.post-grid h2{font-size:2rem;font-weight:400;letter-spacing:-.04em;margin:.8rem 0}.post-grid article>span{display:flex;align-items:center;gap:.4rem;margin-top:1.5rem;color:var(--muted);font-size:.68rem}footer{background:var(--ink);color:var(--white);padding:2rem 0}footer>div{display:flex;justify-content:space-between;font-size:.68rem}footer a{display:flex;align-items:center;gap:.5rem}
+  @media(max-width:760px){.journal-head{padding:5rem 0}.journal-head h1{font-size:4.5rem}.featured{grid-template-columns:1fr;padding-bottom:5rem}.feature-image{height:58svh}.post-grid{grid-template-columns:1fr}.card-image{height:320px}.back{font-size:0}.back svg{width:19px;height:19px}}
+</style>

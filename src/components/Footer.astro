@@ -1,0 +1,15 @@
+---
+import { ArrowRight } from 'lucide-astro';
+---
+<footer>
+  <div class="wrap footer-top">
+    <a class="footer-brand" href="#top"><span>LOVINA</span><small>TRAVEL · BALI</small></a>
+    <div class="footer-links"><a href="#experiences">Experiences</a><a href="#journey">The journey</a><a href="#local">Local guide</a><a href="#contact">Contact</a></div>
+    <form><label for="email">Stories from the north, a few times a year.</label><div><input id="email" type="email" placeholder="Your email" required /><button aria-label="Subscribe"><ArrowRight size={18}/></button></div></form>
+  </div>
+  <div class="wrap footer-bottom"><span>© 2026 Lovina Travel</span><span>08°09' S · 115°01' E</span><span>Made slowly in North Bali</span></div>
+</footer>
+<style>
+  footer{background:var(--ocean);color:var(--white);padding:6rem 0 2rem}.footer-top{display:grid;grid-template-columns:1.2fr .8fr 1fr;gap:4rem}.footer-brand{display:grid;align-content:start}.footer-brand span{font-family:var(--serif);font-size:clamp(3.2rem,6vw,6.5rem);letter-spacing:-.04em;line-height:.8}.footer-brand small{font-size:.55rem;letter-spacing:.3em;margin-top:1rem}.footer-links{display:grid;align-content:start;gap:.9rem;font-family:var(--serif);font-size:1.4rem}.footer-links a:hover{font-style:italic}form label{font-family:var(--serif);font-size:1.3rem;line-height:1.2}form>div{display:flex;border-bottom:1px solid var(--white);margin-top:2rem}input{border:0;background:transparent;color:var(--white);padding:1rem 0;width:100%;outline:0}input::placeholder{color:rgba(255,255,255,.8)}button{border:0;background:transparent;color:var(--white)}.footer-bottom{margin-top:7rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.45);display:flex;justify-content:space-between;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase}
+  @media(max-width:800px){.footer-top{grid-template-columns:1fr;gap:3.5rem}.footer-bottom{margin-top:5rem;align-items:flex-start;flex-direction:column;gap:.8rem}}
+</style>

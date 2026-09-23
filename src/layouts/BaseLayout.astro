@@ -1,0 +1,30 @@
+---
+import '../styles/global.css';
+interface Props { title?: string; description?: string; }
+const { title = 'Lovina Travel — Dolphin Tours & Transport', description = 'Dolphin tours, snorkeling, private transport, and trusted local travel help in Lovina, North Bali.' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <script>
+      import { inView } from 'motion';
+      document.querySelectorAll<HTMLElement>('.reveal').forEach((element) => {
+        inView(element, () => {
+          element.classList.add('is-visible');
+        }, { margin: '0px 0px -8% 0px' });
+      });
+    </script>
+  </body>
+</html>

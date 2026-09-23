@@ -1,0 +1,16 @@
+---
+import { ArrowUpRight } from 'lucide-astro';
+interface Props { number:string; title:string; category:string; description:string; price:string; image:string; position?:string; }
+const { number, title, category, description, price, image, position = 'center' } = Astro.props;
+---
+<article class="card reveal">
+  <a href="#contact" aria-label={`Book ${title}`}>
+    <div class="image-wrap"><img src={image} alt={description} loading="lazy" style={`object-position:${position}`} /><span class="number">{number}</span><span class="round-arrow"><ArrowUpRight size={18} stroke-width={1.4}/></span></div>
+    <div class="meta"><span>{category}</span><span>{price}</span></div>
+    <h3>{title}</h3><p>{description}</p>
+  </a>
+</article>
+<style>
+  .image-wrap{height:min(57vw,620px);position:relative;overflow:hidden;background:var(--sand)}img{height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.16,1,.3,1)}.number{position:absolute;top:1rem;left:1rem;color:var(--white);font-size:.65rem;letter-spacing:.18em}.round-arrow{position:absolute;right:1rem;bottom:1rem;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--white);transition:transform .35s}.meta{display:flex;justify-content:space-between;margin-top:1.25rem;font-size:.61rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase}.card h3{font-family:var(--serif);font-size:clamp(2rem,3vw,3.1rem);font-weight:300;line-height:1;margin:.6rem 0 .7rem;position:relative;display:inline-block}.card h3:after{content:'';position:absolute;left:0;right:0;bottom:-5px;height:1px;background:var(--ocean);transform:scaleX(0);transform-origin:left;transition:transform .45s}.card p{font-size:.82rem;line-height:1.6;max-width:29ch;margin:0}.card:hover img{transform:scale(1.055)}.card:hover h3:after{transform:scaleX(1)}.card:hover .round-arrow{transform:rotate(45deg)}
+  @media(max-width:767px){.card{min-width:74vw}.image-wrap{height:108vw}.card h3{font-size:2.2rem}}
+</style>

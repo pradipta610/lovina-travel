@@ -1,0 +1,21 @@
+---
+import { BusFront, BadgeCheck, MapPin } from 'lucide-astro';
+---
+<section class="local section-pad" id="local">
+  <div class="wrap local-grid">
+    <div class="portrait reveal"><img src="/images/hidden-waterfall.png" alt="A traveller following a local path toward a hidden North Bali waterfall" loading="lazy" /><span class="eyebrow photo-label">Beyond the postcard</span></div>
+    <div class="local-copy">
+      <p class="eyebrow reveal">The local perspective</p>
+      <blockquote class="display reveal">“The best way to experience Lovina is to slow down and let the morning unfold.”</blockquote>
+      <p class="bio reveal">Our team knows the coast, the quiet roads, and the stories that make northern Bali special. Every day is planned with care, but never so tightly that discovery disappears.</p>
+      <div class="trust reveal"><span><BadgeCheck size={18} stroke-width={1.4}/> Local team</span><span><BusFront size={18} stroke-width={1.4}/> Private transport</span><span><MapPin size={18} stroke-width={1.4}/> North Bali based</span></div>
+    </div>
+  </div>
+</section>
+<section class="fleet-band">
+  <div class="wrap fleet-inner reveal"><p class="eyebrow">The road is part of it</p><h2 class="display">Door to shore,<br/><em>comfortably.</em></h2><p>Our air-conditioned private fleet connects Denpasar, Ubud, and the north coast. No transfers to decode. No day wasted in transit.</p><a href="#contact" class="text-link">Plan a pickup →</a></div>
+</section>
+<style>
+  .local-grid{display:grid;grid-template-columns:.84fr 1.16fr;gap:clamp(4rem,9vw,10rem);align-items:center}.portrait{height:min(75vw,770px);position:relative}.portrait img{height:100%;object-fit:cover}.photo-label{position:absolute;left:1.5rem;bottom:1.5rem;color:var(--white)}blockquote{font-size:clamp(3.3rem,6vw,6.4rem);margin:2rem 0 3rem;max-width:13ch}.bio{line-height:1.8;max-width:52ch}.trust{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--sand);display:flex;flex-wrap:wrap;gap:1.7rem}.trust span{display:flex;align-items:center;gap:.5rem;font-size:.67rem;letter-spacing:.11em;text-transform:uppercase}.fleet-band{padding:8rem 0;background:var(--ocean);color:var(--white)}.fleet-inner{display:grid;grid-template-columns:1fr 2fr 1fr;gap:2rem;align-items:end}.fleet-inner h2{font-size:clamp(4rem,7vw,7rem);margin:0}.fleet-inner p:not(.eyebrow){line-height:1.7;font-size:.9rem}.fleet-inner .text-link{grid-column:3}
+  @media(max-width:850px){.local-grid{grid-template-columns:1fr;gap:4rem}.portrait{height:70svh}.fleet-inner{display:block}.fleet-inner h2{margin:1.5rem 0 2rem}.fleet-inner p:not(.eyebrow){margin-bottom:2rem;max-width:35ch}}
+</style>

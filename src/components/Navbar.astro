@@ -1,0 +1,41 @@
+---
+import { Menu, X } from 'lucide-astro';
+---
+<header class="site-header" data-header>
+  <nav class="nav wrap" aria-label="Main navigation">
+    <div class="desktop-links left"><a href="#experiences">Experiences</a><a href="#journey">The journey</a></div>
+    <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <Menu class="open-icon" size={20} stroke-width={1.5} /><X class="close-icon" size={20} stroke-width={1.5} />
+    </button>
+    <a class="wordmark" href="#top" aria-label="Lovina Travel home"><span>LOVINA</span><small>TRAVEL · BALI</small></a>
+    <div class="desktop-links right"><a href="#local">Local guide</a><a href="#contact">Contact</a></div>
+  </nav>
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <a href="#experiences">Experiences</a><a href="#journey">The journey</a><a href="#local">Local guide</a><a href="#contact">Contact</a>
+    <span class="eyebrow">North Bali · Indonesia</span>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const button = document.querySelector<HTMLButtonElement>('.menu-btn');
+  const menu = document.querySelector<HTMLElement>('.mobile-menu');
+  const syncHeader = () => header?.classList.toggle('scrolled', window.scrollY > 40);
+  syncHeader(); window.addEventListener('scroll', syncHeader, { passive: true });
+  const close = () => { header?.classList.remove('open'); button?.setAttribute('aria-expanded', 'false'); menu?.setAttribute('aria-hidden', 'true'); document.body.classList.remove('menu-open'); };
+  button?.addEventListener('click', () => {
+    const open = !header?.classList.contains('open');
+    header?.classList.toggle('open', open); button.setAttribute('aria-expanded', String(open)); menu?.setAttribute('aria-hidden', String(!open)); document.body.classList.toggle('menu-open', open);
+  });
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', close));
+</script>
+
+<style>
+  .site-header{position:fixed;inset:0 0 auto;z-index:50;height:88px;transition:background .4s,box-shadow .4s}
+  .nav{height:88px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+  .desktop-links{display:flex;gap:2.1rem;font-size:.69rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase}.right{justify-content:flex-end}.desktop-links a{position:relative}.desktop-links a:after{content:'';position:absolute;left:0;right:0;bottom:-7px;height:1px;background:currentColor;transform:scaleX(0);transition:transform .3s}.desktop-links a:hover:after{transform:scaleX(1)}
+  .wordmark{text-align:center;line-height:1;display:grid;gap:.28rem}.wordmark span{font-family:var(--serif);font-size:1.35rem;letter-spacing:.19em}.wordmark small{font-size:.48rem;letter-spacing:.28em;font-weight:500}
+  .scrolled,.open{background:rgba(255,255,255,.94);box-shadow:0 1px 0 rgba(74,175,192,.25);backdrop-filter:blur(14px)}
+  .menu-btn,.mobile-menu{display:none}
+  @media(max-width:767px){.nav{grid-template-columns:1fr auto 1fr}.desktop-links{display:none}.menu-btn{display:grid;place-items:center;width:44px;height:44px;border:0;background:none;color:var(--ocean);padding:0}.wordmark{grid-column:2}.close-icon{display:none}.open .open-icon{display:none}.open .close-icon{display:block}.mobile-menu{display:flex;visibility:hidden;opacity:0;position:fixed;inset:88px 0 0;background:var(--white);padding:3rem 1.25rem;flex-direction:column;gap:1.3rem;transform:translateY(-12px);transition:.35s}.open .mobile-menu{visibility:visible;opacity:1;transform:none}.mobile-menu a{font-family:var(--serif);font-size:clamp(2.7rem,13vw,4.5rem);line-height:1}.mobile-menu .eyebrow{margin-top:auto}}
+</style>

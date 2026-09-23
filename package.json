@@ -1,0 +1,20 @@
+{
+  "name": "lovina-travel",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/check": "latest",
+    "@tailwindcss/vite": "latest",
+    "astro": "latest",
+    "lucide-astro": "latest",
+    "motion": "latest",
+    "tailwindcss": "latest",
+    "typescript": "latest"
+  }
+}
