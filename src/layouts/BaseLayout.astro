@@ -66,6 +66,13 @@ const whatsappUrl = 'https://wa.me/6281234567890?text=Halo%20Lovina%20Travel%2C%
             history.replaceState(null, '', target);
           });
         });
+
+        if (window.location.hash) {
+          window.addEventListener('load', () => {
+            const initialTarget = document.querySelector<HTMLElement>(window.location.hash);
+            if (initialTarget) activeLenis.scrollTo(initialTarget, { offset: -76, immediate: true });
+          }, { once: true });
+        }
       }
 
       scrollTopAction?.addEventListener('click', () => {
