@@ -1,7 +1,9 @@
 ---
 import '../styles/global.css';
+import { ArrowUp, MessageCircle } from 'lucide-astro';
 interface Props { title?: string; description?: string; }
 const { title = 'Lovina Travel — Dolphin Tours & Transport', description = 'Dolphin tours, snorkeling, private transport, and trusted local travel help in Lovina, North Bali.' } = Astro.props;
+const whatsappUrl = 'https://wa.me/6281234567890?text=Halo%20Lovina%20Travel%2C%20saya%20ingin%20bertanya%20tentang%20tour.';
 ---
 <!doctype html>
 <html lang="en">
@@ -18,23 +20,37 @@ const { title = 'Lovina Travel — Dolphin Tours & Transport', description = 'Do
   </head>
   <body>
     <slot />
+    <nav class="floating-dock" aria-label="Quick actions">
+      <a class="floating-action whatsapp-action" href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="Chat with Lovina Travel on WhatsApp" data-label="WhatsApp">
+        <MessageCircle size={19} stroke-width={1.8} />
+      </a>
+      <button class="floating-action scroll-top-action" type="button" aria-label="Scroll to the top" data-label="Back to top">
+        <ArrowUp size={19} stroke-width={1.8} />
+      </button>
+    </nav>
     <script>
       import { inView } from 'motion';
       import Lenis from 'lenis';
 
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const finePointer = window.matchMedia('(pointer: fine)').matches;
+      const scrollTopAction = document.querySelector<HTMLElement>('.scroll-top-action');
+      let lenis: Lenis | undefined;
+      const syncScrollTop = () => scrollTopAction?.classList.toggle('is-visible', window.scrollY > window.innerHeight * .7);
+      syncScrollTop();
+      window.addEventListener('scroll', syncScrollTop, { passive: true });
 
       if (!reducedMotion && finePointer) {
-        const lenis = new Lenis({
+        const activeLenis = new Lenis({
           duration: 1.05,
           smoothWheel: true,
           wheelMultiplier: 0.82,
           easing: (t) => 1 - Math.pow(1 - t, 4),
         });
+        lenis = activeLenis;
 
         const frame = (time: number) => {
-          lenis.raf(time);
+          activeLenis.raf(time);
           requestAnimationFrame(frame);
         };
         requestAnimationFrame(frame);
@@ -46,11 +62,19 @@ const { title = 'Lovina Travel — Dolphin Tours & Transport', description = 'Do
             const element = document.querySelector<HTMLElement>(target);
             if (!element) return;
             event.preventDefault();
-            lenis.scrollTo(element, { offset: -76, duration: 1 });
+            activeLenis.scrollTo(element, { offset: -76, duration: 1 });
             history.replaceState(null, '', target);
           });
         });
       }
+
+      scrollTopAction?.addEventListener('click', () => {
+        if (lenis) {
+          lenis.scrollTo(0, { duration: 1 });
+          return;
+        }
+        window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+      });
 
       document.querySelectorAll<HTMLElement>('.reveal').forEach((element) => {
         inView(element, () => {
