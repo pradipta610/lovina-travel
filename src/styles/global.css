@@ -30,6 +30,8 @@ img { display: block; width: 100%; }
 .button:hover { background: transparent; color: var(--ink); transform: translateY(-2px); }
 .button.secondary { background: transparent; color: var(--ink); border-color: var(--line); }
 .button.secondary:hover { border-color: var(--ink); }
+:where(a, button) .lucide-arrow-right { transform-origin: center; transition: transform .45s cubic-bezier(.16, 1, .3, 1); }
+:where(a, button):hover .lucide-arrow-right { transform: translate(1px, -1px) rotate(-45deg); }
 .reveal { opacity: 0; transform: translateY(14px); }
 .reveal.is-visible { opacity: 1; transform: none; transition: opacity .75s ease, transform .75s ease; }
 @media (max-width: 720px) { .shell { width: calc(100% - 2rem); } .section { padding-block: 4.5rem; } }
