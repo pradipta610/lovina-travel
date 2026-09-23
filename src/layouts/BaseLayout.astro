@@ -20,6 +20,38 @@ const { title = 'Lovina Travel — Dolphin Tours & Transport', description = 'Do
     <slot />
     <script>
       import { inView } from 'motion';
+      import Lenis from 'lenis';
+
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+      if (!reducedMotion && finePointer) {
+        const lenis = new Lenis({
+          duration: 1.05,
+          smoothWheel: true,
+          wheelMultiplier: 0.82,
+          easing: (t) => 1 - Math.pow(1 - t, 4),
+        });
+
+        const frame = (time: number) => {
+          lenis.raf(time);
+          requestAnimationFrame(frame);
+        };
+        requestAnimationFrame(frame);
+
+        document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
+          link.addEventListener('click', (event) => {
+            const target = link.getAttribute('href');
+            if (!target || target === '#') return;
+            const element = document.querySelector<HTMLElement>(target);
+            if (!element) return;
+            event.preventDefault();
+            lenis.scrollTo(element, { offset: -76, duration: 1 });
+            history.replaceState(null, '', target);
+          });
+        });
+      }
+
       document.querySelectorAll<HTMLElement>('.reveal').forEach((element) => {
         inView(element, () => {
           element.classList.add('is-visible');

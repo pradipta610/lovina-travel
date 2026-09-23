@@ -12,6 +12,7 @@
     "@astrojs/check": "latest",
     "@tailwindcss/vite": "latest",
     "astro": "latest",
+    "lenis": "^1.3.26",
     "lucide-astro": "latest",
     "motion": "latest",
     "tailwindcss": "latest",
