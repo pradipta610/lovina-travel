@@ -2,17 +2,17 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { ArrowRight, BusFront, Check, MapPin, Menu, ShipWheel, Sparkles, Star, X } from 'lucide-astro';
 
-// Replace with the owner's confirmed WhatsApp number before launch.
-const whatsappUrl = 'https://wa.me/6281234567890?text=Halo%20Lovina%20Travel%2C%20saya%20ingin%20bertanya%20tentang%20tour.';
+import { business } from '../data/business';
+const { whatsappUrl } = business;
 
 const tours = [
-  { number: '01', title: 'Dolphin & Marine Park', price: 'Rp150.000', note: 'A relaxed dolphin tour followed by a visit to Lovina’s marine park.', items: ['Dolphin watching', 'Marine park visit', 'Sharing boat'] },
-  { number: '02', title: 'Dolphin & Snorkeling', price: 'Rp250.000', note: 'Watch dolphins, then slow down for snorkeling in the calm northern waters.', items: ['Dolphin watching', 'Snorkeling', 'Sharing boat'], featured: true },
-  { number: '03', title: 'The Full Morning', price: 'Rp300.000', note: 'The complete sea experience for travellers who want more time on the water.', items: ['Dolphins', 'Marine park', 'Snorkeling & swimming'] },
+  { number: '01', title: 'Sharing Dolphin Tour', price: 'Ask for a quote', note: 'A morning on the Lovina Sea aboard a shared local boat.', items: ['Dolphin watching', 'Shared boat', 'Ask about adult & child options'] },
+  { number: '02', title: 'Private Dolphin Tour', price: 'Ask for a quote', note: 'Your own boat for a morning with your partner, family, or group.', items: ['Dolphin watching', 'Private boat', 'Confirm your group size with Ayu'] },
+  { number: '03', title: 'Plan Your Morning', price: 'Ask for a quote', note: 'Let Ayu help match your dolphin tour and transport to your travel plans.', items: ['Tour package advice', 'Hotel pickup at an extra charge', 'Hotel & villa recommendations'] },
 ];
 
-const privateRates = [['1 guest', 'Rp500.000 / boat'], ['2 guests', 'Rp750.000 / boat'], ['3 guests', 'Rp900.000 / boat'], ['4+ guests', 'Rp250.000 / person']];
-const routes = [['Airport pickup', 'Rp800.000'], ['Airport drop-off', 'Rp800.000'], ['Singaraja — Ubud', 'Rp600.000'], ['Negara — Airport', 'Rp800.000'], ['Singaraja — Airport', 'Rp800.000']];
+const privateRates = [['Departure', 'Around 06:00'], ['Return', 'Around 08:00–09:00'], ['Duration', 'Depends on your package'], ['Hotel pickup', 'Extra fee by location']];
+const routes = [['Lovina', 'Ask for a quote'], ['Singaraja', 'Ask for a quote'], ['Negara', 'Ask for a quote'], ['Denpasar', 'Ask for a quote'], ['Airport transfers', 'Ask for a quote']];
 const reviews = [
   { name: 'Emily R.', origin: 'Australia', text: 'A calm, beautiful morning. Ayu made everything easy, from the pickup to finding the boat.' },
   { name: 'Daniel K.', origin: 'Germany', text: 'Clear communication, fair pricing, and a lovely captain. The dolphins were unforgettable.' },
@@ -38,19 +38,19 @@ const reviews = [
       <div class="hero-copy shell reveal">
         <p class="hero-kicker">North Bali · Sea tours & local travel</p>
         <h1>Lovina</h1>
-        <p>Dolphins at sunrise, snorkeling in clear water,<br/>and simple journeys around the north.</p>
+        <p>Dolphin tours at sunrise, private transport,<br/>and local travel help from Bu Ayu.</p>
         <a class="hero-button" href="#tours">Explore sea tours <ArrowRight size={15}/></a>
       </div>
       <div class="hero-meta shell"><span>08°09' S · 115°01' E</span><span>Scroll to explore</span></div>
     </section>
 
     <section class="tour-section section" id="tours">
-      <div class="shell section-heading reveal"><div><p class="kicker">Sea tours</p><h2 class="title">Choose your morning.</h2></div><p class="lede">Clear packages, local boats, and no complicated add-ons. All prices are in Indonesian rupiah.</p></div>
+      <div class="shell section-heading reveal"><div><p class="kicker">Sea tours</p><h2 class="title">Choose your morning.</h2></div><p class="lede">Depart around 06:00 and return around 08:00–09:00, depending on your package. Contact Ayu for current prices and inclusions.</p></div>
       <div class="shell tour-grid">
         {tours.map((tour) => (
-          <article class:list={['tour-card reveal', { featured: tour.featured }]}>
-            <div class="card-top"><span>{tour.number}</span>{tour.featured && <span class="popular">Most popular</span>}</div>
-            <h3>{tour.title}</h3><p class="price">{tour.price}<small>/ person</small></p><p class="card-note">{tour.note}</p>
+          <article class:list={['tour-card reveal', { featured: tour.number === '02' }]}>
+            <div class="card-top"><span>{tour.number}</span></div>
+            <h3>{tour.title}</h3><p class="price">{tour.price}</p><p class="card-note">{tour.note}</p>
             <ul>{tour.items.map((item) => <li><Check size={15}/>{item}</li>)}</ul>
             <a href={whatsappUrl}>Ask about this tour <ArrowRight size={14}/></a>
           </article>
@@ -69,20 +69,20 @@ const reviews = [
     </section>
 
     <section class="transport section" id="transport">
-      <div class="shell section-heading reveal"><div><p class="kicker">On the road</p><h2 class="title">Transport, kept simple.</h2></div><p class="lede">Private car, HiAce, or ELF for airport transfers and travel across Bali. Long-term motorbike rental is available for international guests.</p></div>
+      <div class="shell section-heading reveal"><div><p class="kicker">On the road</p><h2 class="title">Transport, kept simple.</h2></div><p class="lede">Private cars, Hiace, and Elf serving Lovina, Singaraja, Negara, Denpasar, and airport transfers. Long-term car and motorbike rentals are also available.</p></div>
       <div class="shell transport-grid">
-        <article class="transport-card reveal"><BusFront size={24}/><h3>Private car</h3><p>Comfortable point-to-point transfers for individuals, couples, or small families.</p></article>
-        <article class="transport-card reveal"><ShipWheel size={24}/><h3>HiAce or ELF</h3><p>More space for groups and luggage, with a local driver who knows the route.</p></article>
-        <article class="transport-card reveal"><Sparkles size={24}/><h3>Long-term motorbike</h3><p>Motorbike rental specifically for international visitors staying longer in North Bali.</p></article>
+        <article class="transport-card reveal"><BusFront size={24}/><h3>Private car</h3><p>Terios, Avanza, Xpander, or Xenia for solo travellers, couples, and families. Ask about a female driver when booking.</p></article>
+        <article class="transport-card reveal"><ShipWheel size={24}/><h3>HiAce or ELF</h3><p>Hiace seats up to 15 passengers plus a driver; Elf seats up to 19 plus a driver. For group outings, arisan, and tirta yatra.</p></article>
+        <article class="transport-card reveal"><Sparkles size={24}/><h3>Long-term rentals</h3><p>Car and motorbike rentals for longer stays. Contact Ayu for availability, rental terms, and pricing.</p></article>
       </div>
-      <div class="shell route-table reveal"><div class="table-title"><span class="kicker">Popular routes</span><span>One-way fare</span></div>{routes.map(([route, price]) => <div class="route-row"><span>{route}</span><strong>{price}</strong></div>)}<p>* Reverse journeys between Airport, Negara, and Singaraja use the same listed fare.</p></div>
+      <div class="shell route-table reveal"><div class="table-title"><span class="kicker">Popular routes</span><span>Pricing</span></div>{routes.map(([route, price]) => <div class="route-row"><span>{route}</span><strong>{price}</strong></div>)}<p>Share your pickup point, destination, date, and group size for a transport quote.</p></div>
     </section>
 
     <section class="about section" id="about">
       <div class="shell about-grid">
         <div class="about-image reveal"><img src="/images/hidden-waterfall.png" alt="A quiet trail leading to a waterfall in North Bali" loading="lazy" /></div>
-        <div class="about-copy reveal"><p class="kicker">Your local contact</p><h2 class="title">Ayu Rachel.</h2><p class="about-lead">Working in tourism and hospitality since 2010.</p><p class="lede">Ayu helps guests see Lovina without overplanning it. Beyond tours and transport, she can recommend affordable hotels or villas that fit your route, group, and length of stay.</p>
-          <div class="about-points"><span><Check size={15}/> Local itinerary help</span><span><Check size={15}/> Affordable hotel & villa recommendations</span><span><Check size={15}/> Support from arrival to departure</span></div>
+        <div class="about-copy reveal"><p class="kicker">Your local contact</p><h2 class="title">Bu Ayu.</h2><p class="about-lead">From an insurance career in 2010 to local tours and transport.</p><p class="lede">Through her work in insurance, Ayu built relationships with business clients, hotels, villas, and dolphin tour operators. Today she helps couples, families, groups, and solo travellers plan their time in Lovina, with support in Indonesian and English.</p>
+          <div class="about-points"><span><Check size={15}/> Local itinerary help</span><span><Check size={15}/> Hotel & villa recommendations</span><span><Check size={15}/> Indonesian & English spoken</span></div>
           <a class="button" href={whatsappUrl}>Talk to Ayu <ArrowRight size={14}/></a>
         </div>
       </div>
@@ -110,14 +110,14 @@ const reviews = [
       </div>
       <div class="shell map-wrap">
         <div class="map-frame"><iframe title="Map showing Lovina Beach, North Bali" src="https://www.google.com/maps?q=Lovina%20Beach%2C%20Bali&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
-        <div class="map-copy"><MapPin size={22}/><p class="kicker">Find us in the north</p><h3>Lovina Beach,<br/>North Bali.</h3><p>Meeting point details are shared after your booking, based on your boat and pickup arrangement.</p><a class="button secondary" href="https://maps.google.com/?q=Lovina+Beach+Bali" target="_blank" rel="noreferrer">Open in Google Maps <ArrowRight size={14}/></a></div>
+        <div class="map-copy"><MapPin size={22}/><p class="kicker">Find us in the north</p><h3>Lovina Beach,<br/>North Bali.</h3><p>Your captain, meeting point, and full rundown are shared after payment. Hotel pickup is available at an extra charge depending on location.</p><a class="button secondary" href="https://maps.google.com/?q=Lovina+Beach+Bali" target="_blank" rel="noreferrer">Open in Google Maps <ArrowRight size={14}/></a></div>
       </div>
     </section>
 
-    <section class="contact section" id="contact"><div class="shell contact-inner reveal"><p class="kicker">Start here</p><h2>Tell us when you’re coming.</h2><p>Send your date, number of guests, pickup location, and the experience you want. We’ll help with the rest.</p><a class="button contact-button" href={whatsappUrl}>Chat on WhatsApp <ArrowRight size={15}/></a></div></section>
+    <section class="contact section" id="contact"><div class="shell contact-inner reveal"><p class="kicker">Start here</p><h2>Tell us when you’re coming.</h2><p>Send your date, number of guests, pickup location, and the experience you want. We’ll help with the rest.</p><a class="button contact-button" href={whatsappUrl}>Chat with Bu Ayu <ArrowRight size={15}/></a><p class="contact-details"><a href={whatsappUrl}>{business.phone}</a><br/>Indonesian &amp; English · <a href={business.instagramUrl} target="_blank" rel="noreferrer">{business.instagramHandle}</a></p></div></section>
   </main>
 
-  <footer class="site-footer"><div class="shell footer-inner"><a class="brand footer-brand" href="#top"><span class="brand-mark">L</span><span>Lovina Travel<small>North Bali</small></span></a><p>Dolphins, snorkeling, and trusted local transport.</p><span>© 2026 Lovina Travel</span></div></footer>
+  <footer class="site-footer"><div class="shell footer-inner"><a class="brand footer-brand" href="#top"><span class="brand-mark">L</span><span>Lovina Travel<small>North Bali</small></span></a><p>Dolphin tours & transport · Lovina, North Bali.</p><span>© 2026 Lovina Travel</span></div></footer>
 
   <script>
     const header = document.querySelector<HTMLElement>('[data-header]');
@@ -140,7 +140,7 @@ const reviews = [
   .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(3rem,9vw,9rem);align-items:center}.about-image{height:650px;border-radius:1rem;overflow:hidden}.about-image img{height:100%;object-fit:cover}.about-copy .kicker{margin-bottom:1rem}.about-lead{font-size:1.2rem;margin:1.5rem 0}.about-copy>.lede{max-width:56ch}.about-points{display:grid;gap:.8rem;margin:2rem 0 2.5rem}.about-points span{display:flex;align-items:center;gap:.55rem;font-size:.77rem}
   .gallery-preview{background:var(--ink);color:var(--white)}.gallery-heading{display:grid;grid-template-columns:1.25fr .75fr;gap:4rem;align-items:end;margin-bottom:3rem}.gallery-heading .kicker{margin-bottom:1rem;color:#b5d0ce}.gallery-heading .lede{margin:0;color:#b5c5c5}.gallery-heading>div:last-child>a{width:max-content;display:flex;align-items:center;gap:.55rem;margin-top:1.6rem;padding-bottom:.35rem;border-bottom:1px solid #6e8888;font-size:.72rem}.gallery-teasers{display:grid;grid-template-columns:1.25fr .75fr .75fr;gap:1rem}.gallery-teaser{height:440px;position:relative;overflow:hidden;border-radius:.9rem}.gallery-teaser img{height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1)}.gallery-teaser:after{content:'';position:absolute;inset:42% 0 0;background:linear-gradient(transparent,rgba(5,25,27,.78))}.gallery-teaser>span{position:absolute;z-index:1;inset:auto 1rem 1rem;display:grid;grid-template-columns:1fr auto;align-items:end;font-size:1.05rem}.gallery-teaser small{grid-column:1/-1;margin-bottom:.35rem;color:#d1dfdc;font-size:.58rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase}.gallery-teaser:hover img{transform:scale(1.025)}
   .reviews{background:var(--white)}.review-heading{display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:end}.review-heading .kicker{margin-bottom:1rem}.rating{text-align:right}.rating strong{display:block;font-size:3rem;font-weight:500;letter-spacing:-.06em;line-height:1}.stars{display:flex;gap:.18rem;color:var(--sun)}.rating .stars{justify-content:flex-end;margin:.55rem 0}.rating small{color:var(--muted);font-size:.63rem}.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}.review-card{padding:1.5rem;border:1px solid var(--line);border-radius:1rem;background:var(--paper)}.review-card>p{min-height:105px;font-size:.88rem;line-height:1.7}.review-card footer{display:flex;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--line);font-size:.7rem}.review-card footer strong{font-weight:600}.review-card footer span{color:var(--muted)}.map-wrap{display:grid;grid-template-columns:1.45fr .55fr;margin-top:5rem;border:1px solid var(--line);border-radius:1rem;overflow:hidden}.map-frame{min-height:480px;background:var(--mist)}.map-frame iframe{width:100%;height:100%;min-height:480px;border:0;filter:saturate(.75) contrast(.95)}.map-copy{padding:clamp(2rem,5vw,4rem);display:flex;flex-direction:column;align-items:flex-start;justify-content:center}.map-copy .kicker{margin:1.5rem 0 1rem}.map-copy h3{font-size:clamp(2rem,4vw,3.6rem);font-weight:400;line-height:1;letter-spacing:-.05em;margin:0}.map-copy>p:not(.kicker){color:var(--muted);font-size:.78rem;line-height:1.7;margin:1.5rem 0 2rem}
-  .contact{background:var(--ink);color:var(--white);text-align:center}.contact-inner{max-width:780px}.contact .kicker{color:#b5d0ce}.contact h2{font-size:clamp(3.2rem,7vw,6.5rem);font-weight:400;line-height:.95;letter-spacing:-.06em;margin:1.5rem 0}.contact p:not(.kicker){max-width:52ch;margin:0 auto 2.2rem;color:#b5c5c5;line-height:1.7}.contact-button{background:var(--white);color:var(--ink);border-color:var(--white)}.contact-button:hover{background:var(--white);color:var(--sea);border-color:var(--white)}
+  .contact{background:var(--ink);color:var(--white);text-align:center}.contact-inner{max-width:780px}.contact .kicker{color:#b5d0ce}.contact h2{font-size:clamp(3.2rem,7vw,6.5rem);font-weight:400;line-height:.95;letter-spacing:-.06em;margin:1.5rem 0}.contact p:not(.kicker){max-width:52ch;margin:0 auto 2.2rem;color:#b5c5c5;line-height:1.7}.contact .contact-details{margin:1.5rem auto 0;font-size:.85rem}.contact-details a{text-decoration:underline;text-underline-offset:4px}.contact-button{background:var(--white);color:var(--ink);border-color:var(--white)}.contact-button:hover{background:var(--white);color:var(--sea);border-color:var(--white)}
   .site-footer{padding:2rem 0;background:var(--white)}.footer-inner{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:3rem}.footer-inner p,.footer-inner>span{font-size:.68rem;color:var(--muted)}
   @media(max-width:850px){.nav{width:100%;max-width:none;padding-inline:1rem;grid-template-columns:minmax(0,1fr) auto}.nav-links,.nav-cta{display:none}.menu-button{display:flex;align-items:center;gap:.4rem;justify-self:end;border:0;background:transparent;color:var(--white);font-size:.72rem}.header.scrolled .menu-button{color:var(--ink)}.icon-close{display:none}.open .icon-open{display:none}.open .icon-close{display:block}.mobile-nav{position:fixed;inset:76px 0 auto;display:flex;visibility:hidden;opacity:0;transform:translateY(-8px);background:var(--ink);border-bottom:1px solid rgba(255,255,255,.2);padding:1.5rem;flex-direction:column;gap:1.3rem;transition:.25s}.header.scrolled .mobile-nav{background:var(--paper);color:var(--ink);border-color:var(--line)}.open .mobile-nav{visibility:visible;opacity:1;transform:none}.mobile-nav a{font-size:1.3rem}.hero-image{object-position:53% center}.section-heading,.gallery-heading{grid-template-columns:1fr;gap:1.5rem}.section-heading .lede{max-width:48ch}.tour-grid{grid-template-columns:1fr}.tour-card{min-height:auto}.card-note{min-height:0}.private-grid,.about-grid{grid-template-columns:1fr}.private-image,.about-image{height:62svh}.private-copy,.about-copy{padding-inline:.2rem}.transport-grid{grid-template-columns:1fr}.gallery-teasers{grid-template-columns:1fr 1fr}.gallery-teaser{height:48svh}.gallery-teaser.dolphin{grid-column:1/-1;height:58svh}.review-grid{grid-template-columns:1fr}.review-card>p{min-height:0}.map-wrap{grid-template-columns:1fr}.map-frame,.map-frame iframe{min-height:380px}.footer-inner{grid-template-columns:1fr;gap:1.2rem}}
   @media(max-width:520px){.hero{min-height:640px}.hero-image{object-position:58% center}.hero-copy{width:100%;padding-inline:1rem;margin-top:2rem}.hero-copy h1{font-size:clamp(5.2rem,27vw,7rem);line-height:.82}.hero-copy>p br{display:none}.hero-copy>p{max-width:30ch;font-size:.92rem;font-weight:500}.hero-meta{bottom:1rem}.hero-meta span:last-child{display:none}.gallery-teasers{grid-template-columns:1fr}.gallery-teaser,.gallery-teaser.dolphin{grid-column:auto;height:52svh}.review-heading{grid-template-columns:1fr}.rating{text-align:left}.rating .stars{justify-content:flex-start}.map-frame,.map-frame iframe{min-height:320px}.tour-card{padding:1.25rem}.private-image,.about-image{height:55svh}.rate-list div,.route-row{gap:1rem}.footer-inner p{margin:0}}

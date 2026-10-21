@@ -1,9 +1,10 @@
 ---
 import '../styles/global.css';
+import { business } from '../data/business';
 import { ArrowUp, MessageCircle } from 'lucide-astro';
 interface Props { title?: string; description?: string; }
-const { title = 'Lovina Travel — Dolphin Tours & Transport', description = 'Dolphin tours, snorkeling, private transport, and trusted local travel help in Lovina, North Bali.' } = Astro.props;
-const whatsappUrl = 'https://wa.me/6281234567890?text=Halo%20Lovina%20Travel%2C%20saya%20ingin%20bertanya%20tentang%20tour.';
+const { title = 'Lovina Travel — Dolphin Tours & Transport', description = 'Dolphin tours and private transport with Bu Ayu in Lovina, North Bali. Serving Singaraja, Negara, Denpasar, and airport transfers. Indonesian and English spoken.' } = Astro.props;
+const { whatsappUrl } = business;
 ---
 <!doctype html>
 <html lang="en">
