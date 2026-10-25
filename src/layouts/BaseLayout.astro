@@ -2,9 +2,20 @@
 import '../styles/global.css';
 import { business } from '../data/business';
 import { ArrowUp, MessageCircle } from 'lucide-astro';
-interface Props { title?: string; description?: string; }
+interface Props { title?: string; description?: string; image?: string; imageAlt?: string; article?: boolean; }
 const { title = 'Lovina Travel — Dolphin Tours & Transport', description = 'Dolphin tours and private transport with Bu Ayu in Lovina, North Bali. Serving Singaraja, Negara, Denpasar, and airport transfers. Indonesian and English spoken.' } = Astro.props;
 const { whatsappUrl } = business;
+const site = Astro.site!;
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', site);
+const { image = '/images/lovina-dolphins-hero.webp', imageAlt = 'Dolphins at sunrise in Lovina, North Bali', article = false } = Astro.props;
+const socialImage = new URL(image, site);
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'TravelAgency', '@id': new URL('/#business', site).href, name: 'Lovina Travel', url: site.href, telephone: business.phone, image: new URL('/images/lovina-dolphins-hero.webp', site).href, sameAs: [business.instagramUrl], areaServed: ['Lovina', 'Singaraja', 'Negara', 'Denpasar'], contactPoint: { '@type': 'ContactPoint', telephone: business.phone, contactType: 'reservations', availableLanguage: ['English', 'Indonesian'] } },
+    { '@type': 'WebSite', '@id': new URL('/#website', site).href, url: site.href, name: 'Lovina Travel', inLanguage: 'en', publisher: { '@id': new URL('/#business', site).href } },
+  ],
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -12,6 +23,22 @@ const { whatsappUrl } = business;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:site_name" content="Lovina Travel" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />
+    <slot name="head" />
     <meta name="theme-color" content="#ffffff" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

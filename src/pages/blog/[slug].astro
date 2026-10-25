@@ -6,8 +6,19 @@ import { posts, type Post } from '../../data/posts';
 export function getStaticPaths() { return posts.map((post) => ({ params: { slug: post.slug }, props: { post } })); }
 interface Props { post: Post }
 const { post } = Astro.props;
+const articleData = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.excerpt,
+  image: new URL(post.image, Astro.site).href,
+  mainEntityOfPage: new URL(`/blog/${post.slug}`, Astro.site).href,
+  publisher: { '@id': new URL('/#business', Astro.site).href },
+  inLanguage: 'en',
+};
 ---
-<BaseLayout title={`${post.title} — Lovina Travel`} description={post.excerpt}>
+<BaseLayout title={`${post.title} — Lovina Travel`} description={post.excerpt} image={post.image} imageAlt={post.alt} article>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleData).replace(/</g, '\\u003c')} />
   <header class="article-nav shell"><a href="/blog"><ArrowLeft size={14}/> Journal</a><a class="brand" href="/">Lovina Travel</a><a href="/#tours">Plan a trip <ArrowRight size={14}/></a></header>
   <main>
     <article>
