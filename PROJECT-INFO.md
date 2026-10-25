@@ -1,4 +1,4 @@
-# Informasi Bisnis Lovina Travel
+# Informasi Bisnis Utami Mesari
 
 Dokumen acuan internal untuk pengembangan project dan penyusunan konten website. Dirangkum dari catatan owner yang disampaikan pada 22 Oktober 2026. Informasi di sini belum seluruhnya siap dipublikasikan; bagian yang belum jelas dicatat di akhir dokumen.
 
@@ -115,7 +115,7 @@ Statusnya masih rencana project berikutnya; belum ada detail penawaran untuk kon
 
 ## Detail yang masih perlu dipastikan
 
-- Nama brand resmi yang akan ditampilkan dan alamat/base operasional.
+- Nama brand resmi: **Utami Mesari**. Alamat/base operasional masih perlu dipastikan.
 - Nama bandara yang dilayani.
 - Paket dolphin tour, harga, fasilitas, batas usia anak, dan ketentuan private/sharing boat.
 - Apakah booking wajib lunas atau tersedia deposit, beserta nominal dan tenggat pelunasannya.

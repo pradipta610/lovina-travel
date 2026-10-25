@@ -17,9 +17,9 @@ const articleData = {
   inLanguage: 'en',
 };
 ---
-<BaseLayout title={`${post.title} — Lovina Travel`} description={post.excerpt} image={post.image} imageAlt={post.alt} article>
+<BaseLayout title={`${post.title} — Utami Mesari`} description={post.excerpt} image={post.image} imageAlt={post.alt} article>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleData).replace(/</g, '\\u003c')} />
-  <header class="article-nav shell"><a href="/blog"><ArrowLeft size={14}/> Journal</a><a class="brand" href="/">Lovina Travel</a><a href="/#tours">Plan a trip <ArrowRight size={14}/></a></header>
+  <header class="article-nav shell"><a href="/blog"><ArrowLeft size={14}/> Journal</a><a class="brand" href="/">Utami Mesari</a><a href="/#tours">Plan a trip <ArrowRight size={14}/></a></header>
   <main>
     <article>
       <header class="article-head shell"><p class="kicker">{post.category}</p><h1>{post.title}</h1><div><span>{post.date}</span><span><Clock3 size={13}/>{post.readTime}</span></div></header>

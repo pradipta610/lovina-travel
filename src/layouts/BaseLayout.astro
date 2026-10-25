@@ -3,7 +3,7 @@ import '../styles/global.css';
 import { business } from '../data/business';
 import { ArrowUp, MessageCircle } from 'lucide-astro';
 interface Props { title?: string; description?: string; image?: string; imageAlt?: string; article?: boolean; }
-const { title = 'Lovina Travel — Dolphin Tours & Transport', description = 'Dolphin tours and private transport with Bu Ayu in Lovina, North Bali. Serving Singaraja, Negara, Denpasar, and airport transfers. Indonesian and English spoken.' } = Astro.props;
+const { title = 'Utami Mesari — Dolphin Tours & Transport', description = 'Dolphin tours and private transport with Bu Ayu in Lovina, North Bali. Serving Singaraja, Negara, Denpasar, and airport transfers. Indonesian and English spoken.' } = Astro.props;
 const { whatsappUrl } = business;
 const site = Astro.site!;
 const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', site);
@@ -12,8 +12,8 @@ const socialImage = new URL(image, site);
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'TravelAgency', '@id': new URL('/#business', site).href, name: 'Lovina Travel', url: site.href, telephone: business.phone, image: new URL('/images/lovina-dolphins-hero.webp', site).href, sameAs: [business.instagramUrl], areaServed: ['Lovina', 'Singaraja', 'Negara', 'Denpasar'], contactPoint: { '@type': 'ContactPoint', telephone: business.phone, contactType: 'reservations', availableLanguage: ['English', 'Indonesian'] } },
-    { '@type': 'WebSite', '@id': new URL('/#website', site).href, url: site.href, name: 'Lovina Travel', inLanguage: 'en', publisher: { '@id': new URL('/#business', site).href } },
+    { '@type': 'TravelAgency', '@id': new URL('/#business', site).href, name: 'Utami Mesari', url: site.href, telephone: business.phone, image: new URL('/images/lovina-dolphins-hero.webp', site).href, sameAs: [business.instagramUrl], areaServed: ['Lovina', 'Singaraja', 'Negara', 'Denpasar'], contactPoint: { '@type': 'ContactPoint', telephone: business.phone, contactType: 'reservations', availableLanguage: ['English', 'Indonesian'] } },
+    { '@type': 'WebSite', '@id': new URL('/#website', site).href, url: site.href, name: 'Utami Mesari', inLanguage: 'en', publisher: { '@id': new URL('/#business', site).href } },
   ],
 };
 ---
@@ -25,7 +25,7 @@ const structuredData = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content={article ? 'article' : 'website'} />
-    <meta property="og:site_name" content="Lovina Travel" />
+    <meta property="og:site_name" content="Utami Mesari" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -49,7 +49,7 @@ const structuredData = {
   <body>
     <slot />
     <nav class="floating-dock" aria-label="Quick actions">
-      <a class="floating-action whatsapp-action" href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="Chat with Lovina Travel on WhatsApp" data-label="WhatsApp">
+      <a class="floating-action whatsapp-action" href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="Chat with Utami Mesari on WhatsApp" data-label="WhatsApp">
         <MessageCircle size={19} stroke-width={1.8} />
       </a>
       <button class="floating-action scroll-top-action" type="button" aria-label="Scroll to the top" data-label="Back to top">
