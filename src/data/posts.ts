@@ -1,11 +1,11 @@
 export const posts = [
   {
     slug: 'best-time-to-see-dolphins-in-lovina',
-    title: 'The best time to see dolphins in Lovina',
-    excerpt: 'What an early start really looks like, what to bring, and why every morning on the water is different.',
+    title: 'Lovina Dolphin Tour Preparation: What to Bring & Confirm',
+    excerpt: 'Prepare for your Lovina dolphin tour with a packing checklist, meeting and pickup advice, and the details to confirm before departure.',
     category: 'Sea notes',
     date: '18 Sep 2026',
-    readTime: '4 min read',
+    readTime: '5 min read',
     image: '/images/lovina-dolphins-hero.webp',
     alt: 'Dolphins surfacing in the Lovina Sea at sunrise',
     body: [
@@ -31,11 +31,11 @@ export const posts = [
   },
   {
     slug: 'sharing-or-private-boat',
-    title: 'Sharing boat or private boat?',
-    excerpt: 'A simple guide to choosing the Lovina dolphin trip that fits your group, pace, and budget.',
+    title: 'Private vs Sharing Boat Lovina: How to Choose',
+    excerpt: 'Compare private and sharing boats for a Lovina dolphin tour: who joins, how to compare the total price, and what to ask before booking.',
     category: 'Trip planning',
     date: '02 Sep 2026',
-    readTime: '3 min read',
+    readTime: '5 min read',
     image: '/images/lovina-sunrise.png',
     alt: 'A traditional private boat on calm water near Lovina',
     body: [

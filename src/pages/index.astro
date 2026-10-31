@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { ArrowRight, BusFront, Check, MapPin, Menu, ShipWheel, Sparkles, Star, X } from 'lucide-astro';
+import { ArrowRight, BusFront, Check, MapPin, Menu, ShipWheel, Sparkles, X } from 'lucide-astro';
 
+import { posts } from '../data/posts';
 import { business } from '../data/business';
 const { whatsappUrl } = business;
 
@@ -13,17 +14,26 @@ const tours = [
 
 const privateRates = [['Departure', 'Around 06:00'], ['Return', 'Around 08:00–09:00'], ['Duration', 'Depends on your package'], ['Hotel pickup', 'Extra fee by location']];
 const routes = [['Lovina', 'Ask for a quote'], ['Singaraja', 'Ask for a quote'], ['Negara', 'Ask for a quote'], ['Denpasar', 'Ask for a quote'], ['Airport transfers', 'Ask for a quote']];
-const reviews = [
-  { name: 'Emily R.', origin: 'Australia', text: 'A calm, beautiful morning. Ayu made everything easy, from the pickup to finding the boat.' },
-  { name: 'Daniel K.', origin: 'Germany', text: 'Clear communication, fair pricing, and a lovely captain. The dolphins were unforgettable.' },
-  { name: 'Sophie M.', origin: 'France', text: 'We combined snorkeling with the dolphin tour and never felt rushed. Highly recommended.' },
-];
+const updatedAt = '2026-10-25';
+const pageData = {
+  '@context': 'https://schema.org', '@type': 'WebPage',
+  '@id': new URL('/#webpage', Astro.site).href,
+  url: Astro.site!.href,
+  name: 'Utami Mesari Tours | Lovina Dolphin Tours & Transport',
+  description: 'Plan Lovina dolphin tours, private transport and North Bali trips with Bu Ayu at Utami Mesari Tours.',
+  dateModified: updatedAt,
+  inLanguage: 'en',
+  about: { '@id': new URL('/#business', Astro.site).href },
+  isPartOf: { '@id': new URL('/#website', Astro.site).href },
+};
+
 ---
 
-<BaseLayout>
+<BaseLayout title="Utami Mesari Tours | Lovina Dolphin Tours & Transport" description="Plan Lovina dolphin tours, private transport and North Bali trips with Bu Ayu at Utami Mesari Tours. Contact us in Indonesian or English for a quote.">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(pageData).replace(/</g, '\u003c')} />
   <header class="header" data-header>
     <div class="shell nav">
-      <a class="brand" href="#top"><span class="brand-mark">U</span><span>Utami Mesari<small>North Bali</small></span></a>
+      <a class="brand" href="#top"><span class="brand-mark">U</span><span>Utami Mesari Tours<small>Lovina · North Bali</small></span></a>
       <nav class="nav-links" aria-label="Main navigation"><a href="#tours">Sea tours</a><a href="#transport">Transport</a><a href="/gallery">Gallery</a><a href="#about">About</a><a href="/blog">Journal</a></nav>
       <a class="button nav-cta" href={whatsappUrl}>Plan a trip <ArrowRight size={14}/></a>
       <button class="menu-button" aria-label="Open menu" aria-expanded="false"><span>Menu</span><Menu class="icon-open" size={18}/><X class="icon-close" size={18}/></button>
@@ -36,16 +46,16 @@ const reviews = [
       <img class="hero-image" src="/images/lovina-dolphins-hero.webp" alt="A pod of dolphins surfacing beside a traditional boat at sunrise in Lovina" fetchpriority="high" />
       <div class="hero-shade"></div>
       <div class="hero-copy shell reveal">
-        <p class="hero-kicker">North Bali · Sea tours & local travel</p>
-        <h1>Lovina</h1>
-        <p>Dolphin tours at sunrise, private transport,<br/>and local travel help from Bu Ayu.</p>
-        <a class="hero-button" href="#tours">Explore sea tours <ArrowRight size={15}/></a>
+        <p class="hero-kicker">Lovina, North Bali · With Bu Ayu</p>
+        <h1 class="brand-heading">Utami Mesari <span>Tours</span></h1>
+        <p>Lovina dolphin tours, private transport,<br/> and North Bali travel help from Bu Ayu.</p>
+        <a class="hero-button" href="/dolphin-tour-lovina/">Explore sea tours <ArrowRight size={15}/></a>
       </div>
       <div class="hero-meta shell"><span>08°09' S · 115°01' E</span><span>Scroll to explore</span></div>
     </section>
 
     <section class="tour-section section" id="tours">
-      <div class="shell section-heading reveal"><div><p class="kicker">Sea tours</p><h2 class="title">Choose your morning.</h2></div><p class="lede">Depart around 06:00 and return around 08:00–09:00, depending on your package. Contact Ayu for current prices and inclusions.</p></div>
+      <div class="shell section-heading reveal"><div><p class="kicker">Sea tours</p><h2 class="title">Dolphin tours in Lovina.</h2></div><p class="lede">Depart around 06:00 and return around 08:00–09:00, depending on your package. Contact Ayu for current prices and inclusions.</p></div>
       <div class="shell tour-grid">
         {tours.map((tour) => (
           <article class:list={['tour-card reveal', { featured: tour.number === '02' }]}>
@@ -60,8 +70,8 @@ const reviews = [
 
     <section class="private-section section">
       <div class="shell private-grid">
-        <div class="private-image reveal"><img src="/images/lovina-sunrise.png" alt="A private traditional boat on the calm Lovina Sea" loading="lazy" /><span>Private means your pace.</span></div>
-        <div class="private-copy reveal"><p class="kicker">Private boat</p><h2 class="title">A quieter way<br/>to go.</h2><p class="lede">Your own boat, a flexible morning, and more room to enjoy the sea with your group.</p>
+        <div class="private-image reveal"><img src="/images/lovina-sunrise.png" alt="A private traditional boat on the calm Lovina Sea" loading="lazy" /><span>A boat for your group.</span></div>
+        <div class="private-copy reveal"><p class="kicker">Private boat</p><h2 class="title">A quieter way<br/>to go.</h2><p class="lede">A boat for your own group rather than a shared departure. Tell Ayu your group size and ask which package, schedule, and inclusions are available.</p>
           <div class="rate-list">{privateRates.map(([group, rate]) => <div><span>{group}</span><strong>{rate}</strong></div>)}</div>
           <a class="button" href={whatsappUrl}>Book a private boat <ArrowRight size={14}/></a>
         </div>
@@ -69,18 +79,28 @@ const reviews = [
     </section>
 
     <section class="transport section" id="transport">
-      <div class="shell section-heading reveal"><div><p class="kicker">On the road</p><h2 class="title">Transport, kept simple.</h2></div><p class="lede">Private cars, Hiace, and Elf serving Lovina, Singaraja, Negara, Denpasar, and airport transfers. Long-term car and motorbike rentals are also available.</p></div>
+      <div class="shell section-heading reveal"><div><p class="kicker">On the road</p><h2 class="title">Private &amp; group transport.</h2></div><p class="lede">Private cars, Hiace, and Elf serving Lovina, Singaraja, Negara, Denpasar, and airport transfers. Long-term car and motorbike rentals are also available.</p></div>
       <div class="shell transport-grid">
-        <article class="transport-card reveal"><BusFront size={24}/><h3>Private car</h3><p>Terios, Avanza, Xpander, or Xenia for solo travellers, couples, and families. Ask about a female driver when booking.</p></article>
+        <article class="transport-card reveal"><BusFront size={24}/><h3>Private car</h3><p>Terios, Avanza, Xpander, or Xenia for solo travellers, couples, and families. A female driver may be requested, subject to availability.</p></article>
         <article class="transport-card reveal"><ShipWheel size={24}/><h3>HiAce or ELF</h3><p>Hiace seats up to 15 passengers plus a driver; Elf seats up to 19 plus a driver. For group outings, arisan, and tirta yatra.</p></article>
         <article class="transport-card reveal"><Sparkles size={24}/><h3>Long-term rentals</h3><p>Car and motorbike rentals for longer stays. Contact Ayu for availability, rental terms, and pricing.</p></article>
       </div>
       <div class="shell route-table reveal"><div class="table-title"><span class="kicker">Popular routes</span><span>Pricing</span></div>{routes.map(([route, price]) => <div class="route-row"><span>{route}</span><strong>{price}</strong></div>)}<p>Share your pickup point, destination, date, and group size for a transport quote.</p></div>
     </section>
 
+    <section class="section local-trips" id="local-trips">
+      <div class="shell section-heading"><div><p class="kicker">Beyond the sea</p><h2 class="title">Plan a day in<br/>North Bali.</h2></div><p class="lede">Ask Bu Ayu about local routes, transport, and hotel or villa recommendations. Choose your stops together before confirming an itinerary.</p></div>
+      <div class="shell destination-grid">
+        <article class="destination-card"><div class="destination-image"><img src="/images/family-transport.webp" alt="A family vehicle for exploring North Bali" loading="lazy"/><span class="destination-tag">01 / Culture &amp; local life</span></div><div class="destination-copy"><h3>Singaraja</h3><p>Local markets, Sasana Budaya, Chinese Temple, and Beji Temple. Plan the stops and pace with Ayu.</p><a href={whatsappUrl}>Plan this route <span class="card-arrow"><ArrowRight size={17}/></span></a></div></article>
+        <article class="destination-card"><div class="destination-image"><img src="/images/hidden-waterfall.png" alt="Waterfall scenery as inspiration for a North Bali day trip" loading="lazy"/><span class="destination-tag">02 / Springs &amp; waterfalls</span></div><div class="destination-copy"><h3>Banjar &amp; waterfalls</h3><p>Ask about Banjar Hot Spring, Buddhist Temple, or a visit to Sekumpul. Choose a route that fits your day.</p><a href={whatsappUrl}>Explore your options <span class="card-arrow"><ArrowRight size={17}/></span></a></div></article>
+        <article class="destination-card"><div class="destination-image"><img src="/images/lovina-sunrise.png" alt="A quiet morning in North Bali before an inland day trip" loading="lazy"/><span class="destination-tag">03 / An inland escape</span></div><div class="destination-copy"><h3>Aling-Aling &amp; beyond</h3><p>Discuss Aling-Aling and an onward route through Munduk toward Ulun Danu Bratan. Confirm timing with Ayu.</p><a href={whatsappUrl}>Shape your day <span class="card-arrow"><ArrowRight size={17}/></span></a></div></article>
+      </div>
+      <p class="shell destination-note">A little inspiration for your route. Images are illustrative; stops and itinerary are agreed with Ayu.</p>
+    </section>
+
     <section class="about section" id="about">
       <div class="shell about-grid">
-        <div class="about-image reveal"><img src="/images/hidden-waterfall.png" alt="A quiet trail leading to a waterfall in North Bali" loading="lazy" /></div>
+        <div class="about-image reveal"><img src="/images/buk-ayu.jpeg" alt="Bu Ayu, owner of Utami Mesari Tours" width="908" height="1600" loading="lazy" style="object-position:center 30%" /></div>
         <div class="about-copy reveal"><p class="kicker">Your local contact</p><h2 class="title">Bu Ayu.</h2><p class="about-lead">From an insurance career in 2010 to local tours and transport.</p><p class="lede">Through her work in insurance, Ayu built relationships with business clients, hotels, villas, and dolphin tour operators. Today she helps couples, families, groups, and solo travellers plan their time in Lovina, with support in Indonesian and English.</p>
           <div class="about-points"><span><Check size={15}/> Local itinerary help</span><span><Check size={15}/> Hotel & villa recommendations</span><span><Check size={15}/> Indonesian & English spoken</span></div>
           <a class="button" href={whatsappUrl}>Talk to Ayu <ArrowRight size={14}/></a>
@@ -101,25 +121,77 @@ const reviews = [
     </section>
 
     <section class="reviews section" id="reviews">
-      <div class="shell review-heading">
-        <div><p class="kicker">Google reviews</p><h2 class="title">Words from the water.</h2></div>
-        <div class="rating"><strong>4.9</strong><span class="stars" aria-label="5 out of 5 stars">{Array.from({ length: 5 }).map(() => <Star size={16} fill="currentColor" />)}</span><small>Sample review content</small></div>
-      </div>
-      <div class="shell review-grid">
-        {reviews.map((review) => <article class="review-card"><div class="stars">{Array.from({ length: 5 }).map(() => <Star size={13} fill="currentColor" />)}</div><p>“{review.text}”</p><footer><strong>{review.name}</strong><span>{review.origin}</span></footer></article>)}
-      </div>
+      <div class="shell section-heading"><div><p class="kicker">Booking with Bu Ayu</p><h2 class="title">From first message<br/>to meeting point.</h2></div><p class="lede">Your main contact at Utami Mesari Tours is Bu Ayu. Ask about availability and agree on the package, price, and terms before making payment.</p></div>
+      <ol class="shell booking-steps">
+        <li><h3>Share your plans</h3><p>Send your travel date, group size, pickup location, and the tour or vehicle you need.</p></li>
+        <li><h3>Confirm your booking</h3><p>Agree on inclusions, any pickup charge, payment arrangements, and cancellation or weather terms with Ayu.</p></li>
+        <li><h3>Receive your trip details</h3><p>After payment, receive your captain, meeting point, and rundown, or confirm your hotel pickup as agreed.</p></li>
+      </ol>
       <div class="shell map-wrap">
-        <div class="map-frame"><iframe title="Map showing Lovina Beach, North Bali" src="https://www.google.com/maps?q=Lovina%20Beach%2C%20Bali&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
-        <div class="map-copy"><MapPin size={22}/><p class="kicker">Find us in the north</p><h3>Lovina Beach,<br/>North Bali.</h3><p>Your captain, meeting point, and full rundown are shared after payment. Hotel pickup is available at an extra charge depending on location.</p><a class="button secondary" href="https://maps.google.com/?q=Lovina+Beach+Bali" target="_blank" rel="noreferrer">Open in Google Maps <ArrowRight size={14}/></a></div>
+        <div class="map-frame" data-map>
+          <div class="map-preview"><div class="map-topography" aria-hidden="true"><span class="map-coast"></span><span class="map-road road-one"></span><span class="map-road road-two"></span></div><span class="map-sea-label">BALI SEA</span><div class="map-pin"><MapPin size={25}/><strong>Lovina</strong><small>North Bali</small></div><button class="map-load" type="button"><MapPin size={16}/> Explore the interactive map <ArrowRight size={16}/></button><span class="map-preview-note">Area illustration · Not to scale</span></div>
+          <iframe title="Interactive map of Lovina Beach, North Bali" data-map-src="https://maps.google.com/maps?q=Lovina%20Beach%20Bali&amp;t=m&amp;z=12&amp;output=embed" referrerpolicy="no-referrer-when-downgrade" allowfullscreen hidden></iframe>
+          <a class="map-external" href="https://maps.google.com/?q=Lovina+Beach+Bali" target="_blank" rel="noreferrer">Open Google Maps <ArrowRight size={14}/></a>
+        </div>
+        <div class="map-copy"><p class="kicker">Meet us in the north</p><h3>A morning<br/>in Lovina.</h3><p>Our travel area is Lovina Beach, North Bali. Your exact meeting point and captain are shared after payment.</p><div class="map-detail"><MapPin size={18}/><span>Hotel pickup available<br/><small>Extra charge based on location</small></span></div><a class="button secondary" href={whatsappUrl}>Arrange your pickup <ArrowRight size={14}/></a><small class="map-disclaimer">Area guide, not an office address.</small></div>
       </div>
+    </section>
+
+    <section class="section planning-help" id="planning-help">
+      <div class="shell section-heading"><div><p class="kicker">Before you book</p><h2 class="title">A few useful answers.</h2></div><p class="lede">Start with these details, then ask Ayu about your specific date and group.</p></div>
+      <div class="shell faq-layout">
+        <aside class="faq-aside"><span class="faq-eyebrow">A little clarity<br/> before you go.</span><p>Every trip starts with a conversation. Bu Ayu can help you work out the details.</p><a href={whatsappUrl}>Ask Ayu directly <ArrowRight size={16}/></a><span class="faq-language">Indonesian &amp; English</span></aside>
+        <div class="home-faq">
+          <details open><summary><span class="faq-number">01</span><span>How much does a dolphin tour or transfer cost?</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer"><p>Ask Ayu for a quote for your date, group size, boat or vehicle, and pickup location. Confirm what is included and any extra charges before booking.</p></div></details>
+          <details><summary><span class="faq-number">02</span><span>When does the dolphin tour leave?</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer"><p>Departure is usually around 06:00, with a return around 08:00–09:00 depending on the package. Confirm your exact meeting time when booking.</p></div></details>
+          <details><summary><span class="faq-number">03</span><span>Can you help families and groups with transport?</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer"><p>Yes. Options include family cars, Hiace for up to 15 passengers plus a driver, and Elf for up to 19 passengers plus a driver. Confirm the vehicle and luggage needs with Ayu.</p></div></details>
+          <details><summary><span class="faq-number">04</span><span>Can I arrange a longer stay or a local itinerary?</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer"><p>Ask about long-term car and motorbike rentals, hotel or villa recommendations, and local trip planning. Availability, rental terms, and prices are confirmed directly with Ayu.</p></div></details>
+        </div>
+      </div>
+      <div class="shell journal-intro"><div><p class="kicker">A few notes from the north</p><h3>A little reading.<br/>A better trip.</h3></div><a href="/blog">Explore the journal <ArrowRight size={16}/></a></div>
+      <div class="shell journal-grid">{posts.map((post, index) => <a class="journal-card" href={`/blog/${post.slug}`}><div class="journal-image"><img src={post.image} alt={post.alt} loading="lazy"/><span class="journal-index">0{index + 1}</span><span class="journal-arrow"><ArrowRight size={21}/></span></div><div class="journal-copy"><span class="journal-category">{post.category}</span><h4>{post.title}</h4><p>{post.excerpt}</p><span class="journal-read">Read the story <ArrowRight size={14}/></span></div></a>)}</div>
     </section>
 
     <section class="contact section" id="contact"><div class="shell contact-inner reveal"><p class="kicker">Start here</p><h2>Tell us when you’re coming.</h2><p>Send your date, number of guests, pickup location, and the experience you want. We’ll help with the rest.</p><a class="button contact-button" href={whatsappUrl}>Chat with Bu Ayu <ArrowRight size={15}/></a><p class="contact-details"><a href={whatsappUrl}>{business.phone}</a><br/>Indonesian &amp; English · <a href={business.instagramUrl} target="_blank" rel="noreferrer">{business.instagramHandle}</a></p></div></section>
   </main>
 
-  <footer class="site-footer"><div class="shell footer-inner"><a class="brand footer-brand" href="#top"><span class="brand-mark">U</span><span>Utami Mesari<small>North Bali</small></span></a><p>Dolphin tours & transport · Lovina, North Bali.</p><span>© 2026 Utami Mesari</span></div></footer>
+  <footer class="site-footer"><div class="shell footer-inner"><a class="brand footer-brand" href="#top"><span class="brand-mark">U</span><span>Utami Mesari Tours<small>Lovina · North Bali</small></span></a><p>Dolphin tours & transport · Lovina, North Bali.</p><span>© 2026 Utami Mesari Tours</span></div></footer>
+
+  <p class="page-updated shell">Last updated: <time datetime={updatedAt}>25 October 2026</time></p>
 
   <script>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    document.querySelectorAll<HTMLDetailsElement>('.home-faq details').forEach((details) => {
+      const summary = details.querySelector('summary')!;
+      const answer = details.querySelector<HTMLElement>('.faq-answer')!;
+      let animation: Animation | undefined;
+      let expanded = details.open;
+      summary.setAttribute('aria-expanded', String(expanded));
+      summary.addEventListener('click', (event) => {
+        event.preventDefault();
+        const from = details.getBoundingClientRect().height;
+        animation?.cancel();
+        expanded = !expanded;
+        summary.setAttribute('aria-expanded', String(expanded));
+        details.classList.toggle('is-closing', !expanded);
+        details.open = true;
+        const summaryHeight = summary.getBoundingClientRect().height;
+        const to = expanded ? summaryHeight + answer.getBoundingClientRect().height : summaryHeight;
+        if (reduceMotion.matches) { details.open = expanded; details.classList.remove('is-closing'); return; }
+        animation = details.animate([{ height: `${from}px` }, { height: `${to}px` }], { duration: 360, easing: 'cubic-bezier(.22,1,.36,1)' });
+        animation.onfinish = () => { details.open = expanded; details.classList.remove('is-closing'); animation = undefined; };
+      });
+    });
+    const map = document.querySelector<HTMLElement>('[data-map]');
+    const mapButton = map?.querySelector<HTMLButtonElement>('.map-load');
+    mapButton?.addEventListener('click', () => {
+      const frame = map?.querySelector<HTMLIFrameElement>('iframe');
+      if (!frame || !mapButton) return;
+      frame.src = frame.dataset.mapSrc ?? '';
+      frame.hidden = false;
+      map?.classList.add('map-requested');
+      frame.focus();
+    });
     const header = document.querySelector<HTMLElement>('[data-header]');
     const menuButton = document.querySelector<HTMLButtonElement>('.menu-button');
     const syncHeader = () => header?.classList.toggle('scrolled', window.scrollY > 48);
@@ -132,6 +204,9 @@ const reviews = [
 </BaseLayout>
 
 <style>
+  .hero-copy h1.brand-heading{font-size:clamp(3.5rem,9vw,8rem);line-height:.94;letter-spacing:-.06em;overflow-wrap:normal}.brand-heading span{display:block;font-size:.56em;letter-spacing:-.035em;margin-top:.2em}.local-trips{background:var(--white)}.booking-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;list-style:decimal-leading-zero;padding-left:2rem}.booking-steps li{padding-left:.5rem}.booking-steps h3,.reading-links h3{font-size:1.1rem}.booking-steps p,.home-faq p{font-size:.9rem;line-height:1.75;color:var(--muted)}.home-faq details{padding:1.2rem 0;border-bottom:1px solid var(--line)}.home-faq summary{cursor:pointer;font-weight:500;line-height:1.6}.home-faq p{max-width:75ch}.reading-links{margin-top:3rem;display:grid;gap:1rem}.reading-links a{display:flex;align-items:center;gap:.7rem;text-decoration:underline;text-underline-offset:4px;font-size:.9rem}.page-updated{font-size:.75rem;color:var(--muted);padding-bottom:1.5rem}.booking-steps li::marker{color:var(--sea);font-weight:600}
+  @media(max-width:850px){.booking-steps{grid-template-columns:1fr;gap:1rem}.hero-copy h1.brand-heading{font-size:clamp(3.2rem,10vw,5.5rem)}}
+
   .header{position:fixed;inset:0 0 auto;z-index:50;color:var(--white);background:transparent;border-bottom:1px solid rgba(255,255,255,.25);transition:background .3s ease,color .3s ease,border-color .3s ease,box-shadow .3s ease;backdrop-filter:blur(0)}.nav{height:76px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}.brand{display:flex;align-items:center;gap:.7rem;width:max-content;font-size:.86rem;font-weight:600;letter-spacing:-.02em}.brand-mark{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--white);color:var(--ink);transition:.3s ease}.brand small{display:block;color:rgba(255,255,255,.72);font-size:.58rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;margin-top:.1rem;transition:color .3s ease}.nav-links{display:flex;gap:2rem;font-size:.76rem;color:rgba(255,255,255,.85)}.nav-links a:hover{color:var(--white)}.nav-cta{justify-self:end;min-height:40px;padding:.5rem 1rem;background:var(--white);border-color:var(--white);color:var(--ink)}.nav-cta:hover{background:transparent;color:var(--white)}.menu-button,.mobile-nav{display:none}.header.scrolled{color:var(--ink);background:rgba(246,247,243,.94);border-color:var(--line);box-shadow:0 8px 30px rgba(21,56,59,.06);backdrop-filter:blur(14px)}.header.scrolled .brand-mark{background:var(--ink);color:var(--white)}.header.scrolled .brand small,.header.scrolled .nav-links{color:var(--muted)}.header.scrolled .nav-links a:hover{color:var(--ink)}.header.scrolled .nav-cta{background:var(--ink);border-color:var(--ink);color:var(--white)}.header.scrolled .nav-cta:hover{background:var(--sea);border-color:var(--sea);color:var(--white)}
   .hero{height:100svh;min-height:680px;position:relative;display:grid;place-items:center;overflow:hidden;background:var(--ink);color:var(--white)}.hero-image{position:absolute;inset:0;height:100%;object-fit:cover;object-position:center 52%}.hero-shade{position:absolute;inset:0;background:radial-gradient(ellipse 54% 48% at 50% 55%,rgba(6,29,32,.38) 0%,rgba(6,29,32,.2) 48%,transparent 78%),linear-gradient(180deg,rgba(6,27,30,.42) 0%,rgba(6,27,30,.08) 34%,rgba(6,27,30,.12) 58%,rgba(6,27,30,.52) 100%)}.hero-copy{position:relative;z-index:2;text-align:center;margin-top:3rem}.hero-kicker{margin:0 0 1.2rem;font-size:.68rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;text-shadow:0 2px 18px rgba(3,18,20,.32)}.hero-copy h1{font-size:clamp(6.5rem,15vw,13rem);font-weight:500;line-height:.78;letter-spacing:-.085em;margin:0;text-shadow:0 3px 32px rgba(3,18,20,.28)}.hero-copy>p{font-size:clamp(.95rem,1.6vw,1.25rem);font-weight:500;line-height:1.45;margin:2rem auto 1.7rem;text-shadow:0 2px 20px rgba(3,18,20,.42)}.hero-button{display:inline-flex;align-items:center;gap:.65rem;min-height:48px;padding:.75rem 1.25rem;border-radius:999px;background:var(--white);color:var(--ink);font-size:.76rem;font-weight:600;transition:.25s}.hero-button:hover{transform:translateY(-2px);background:var(--sea);color:var(--white)}.hero-meta{position:absolute;z-index:2;bottom:1.5rem;left:50%;transform:translateX(-50%);display:flex;justify-content:space-between;font-size:.61rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.82);text-shadow:0 2px 16px rgba(3,18,20,.38)}
   .tour-section{background:var(--white)}.section-heading{display:grid;grid-template-columns:1.6fr 1fr;gap:4rem;align-items:end;margin-bottom:3rem}.section-heading .kicker{margin-bottom:1rem}.section-heading .lede{margin:0}.tour-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.tour-card{padding:1.5rem;border:1px solid var(--line);border-radius:1rem;background:var(--white);display:flex;flex-direction:column;min-height:465px}.tour-card.featured{background:var(--ink);color:var(--white);border-color:var(--ink)}.card-top{display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted)}.featured .card-top{color:#b8cbcb}.popular{padding:.35rem .55rem;border:1px solid currentColor;border-radius:999px;text-transform:uppercase;letter-spacing:.08em}.tour-card h3{font-size:1.45rem;font-weight:500;letter-spacing:-.035em;margin:2.5rem 0 1.1rem}.price{font-size:1.8rem;margin:0}.price small{font-size:.7rem;font-weight:400;color:var(--muted);margin-left:.35rem}.featured .price small,.featured .card-note{color:#b8cbcb}.card-note{min-height:70px;color:var(--muted);font-size:.82rem;line-height:1.6}.tour-card ul{list-style:none;padding:1.2rem 0;margin:1rem 0;border-top:1px solid var(--line);display:grid;gap:.7rem}.featured ul{border-color:#496365}.tour-card li{display:flex;gap:.55rem;align-items:center;font-size:.75rem}.tour-card>a{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--line);font-size:.72rem;font-weight:500}.featured>a{border-color:#496365}
@@ -144,4 +219,62 @@ const reviews = [
   .site-footer{padding:2rem 0;background:var(--white)}.footer-inner{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:3rem}.footer-inner p,.footer-inner>span{font-size:.68rem;color:var(--muted)}
   @media(max-width:850px){.nav{width:100%;max-width:none;padding-inline:1rem;grid-template-columns:minmax(0,1fr) auto}.nav-links,.nav-cta{display:none}.menu-button{display:flex;align-items:center;gap:.4rem;justify-self:end;border:0;background:transparent;color:var(--white);font-size:.72rem}.header.scrolled .menu-button{color:var(--ink)}.icon-close{display:none}.open .icon-open{display:none}.open .icon-close{display:block}.mobile-nav{position:fixed;inset:76px 0 auto;display:flex;visibility:hidden;opacity:0;transform:translateY(-8px);background:var(--ink);border-bottom:1px solid rgba(255,255,255,.2);padding:1.5rem;flex-direction:column;gap:1.3rem;transition:.25s}.header.scrolled .mobile-nav{background:var(--paper);color:var(--ink);border-color:var(--line)}.open .mobile-nav{visibility:visible;opacity:1;transform:none}.mobile-nav a{font-size:1.3rem}.hero-image{object-position:53% center}.section-heading,.gallery-heading{grid-template-columns:1fr;gap:1.5rem}.section-heading .lede{max-width:48ch}.tour-grid{grid-template-columns:1fr}.tour-card{min-height:auto}.card-note{min-height:0}.private-grid,.about-grid{grid-template-columns:1fr}.private-image,.about-image{height:62svh}.private-copy,.about-copy{padding-inline:.2rem}.transport-grid{grid-template-columns:1fr}.gallery-teasers{grid-template-columns:1fr 1fr}.gallery-teaser{height:48svh}.gallery-teaser.dolphin{grid-column:1/-1;height:58svh}.review-grid{grid-template-columns:1fr}.review-card>p{min-height:0}.map-wrap{grid-template-columns:1fr}.map-frame,.map-frame iframe{min-height:380px}.footer-inner{grid-template-columns:1fr;gap:1.2rem}}
   @media(max-width:520px){.hero{min-height:640px}.hero-image{object-position:58% center}.hero-copy{width:100%;padding-inline:1rem;margin-top:2rem}.hero-copy h1{font-size:clamp(5.2rem,27vw,7rem);line-height:.82}.hero-copy>p br{display:none}.hero-copy>p{max-width:30ch;font-size:.92rem;font-weight:500}.hero-meta{bottom:1rem}.hero-meta span:last-child{display:none}.gallery-teasers{grid-template-columns:1fr}.gallery-teaser,.gallery-teaser.dolphin{grid-column:auto;height:52svh}.review-heading{grid-template-columns:1fr}.rating{text-align:left}.rating .stars{justify-content:flex-start}.map-frame,.map-frame iframe{min-height:320px}.tour-card{padding:1.25rem}.private-image,.about-image{height:55svh}.rate-list div,.route-row{gap:1rem}.footer-inner p{margin:0}}
+
+  /* Destination photography and accessible interactions. Homepage hero retains the approved centered composition. */
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  .destination-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem}
+  .destination-card{border:1px solid var(--line);border-radius:1rem;overflow:hidden;background:var(--paper);transition:transform .4s ease,box-shadow .4s ease}
+  .destination-image{height:260px;position:relative;overflow:hidden}
+  .destination-image:after{content:'';position:absolute;inset:50% 0 0;background:linear-gradient(transparent,rgba(8,30,31,.65));pointer-events:none}
+  .destination-image img{height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+  .destination-tag{position:absolute;z-index:1;bottom:1.1rem;left:1.3rem;color:white;font-size:.59rem;letter-spacing:.12em;text-transform:uppercase}
+  .destination-copy{padding:1.5rem;display:flex;flex-direction:column;min-height:265px}
+  .destination-copy h3{font-size:1.5rem;line-height:1.2;font-weight:500;letter-spacing:-.04em;margin:0 0 1rem}
+  .destination-copy p{font-size:.85rem;line-height:1.8;color:var(--muted);margin:0 0 1.7rem}
+  .destination-copy>a{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:auto;padding-top:1rem;border-top:1px solid var(--line);font-size:.76rem;font-weight:500}
+  .card-arrow{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#e5ece6;transition:background .25s,color .25s}
+  .destination-copy>a:hover .card-arrow{background:var(--ink);color:white}
+  .destination-note{font-size:.69rem;line-height:1.7;color:var(--muted);margin-top:1.3rem}
+  .map-wrap{grid-template-columns:minmax(0,1.25fr) minmax(310px,.75fr);min-height:480px}
+  .map-frame{position:relative;min-width:0;min-height:480px;isolation:isolate;overflow:hidden}
+  .map-preview{position:absolute;inset:0;background:#bcd3d0;overflow:hidden}
+  .map-topography{position:absolute;inset:0;background:repeating-linear-gradient(20deg,transparent 0 48px,rgba(255,255,255,.12) 49px 50px)}
+  .map-coast{position:absolute;inset:42% -20% -35% -15%;border-radius:48% 40% 0 0;transform:rotate(-12deg);background:#e7e9dc;box-shadow:0 -8px 0 #d8e1d7,0 -14px 0 #afc9c0}
+  .map-road{position:absolute;background:transparent;border:5px solid #faf9ef;border-radius:50%;transform:rotate(-15deg)}
+  .road-one{width:110%;height:130px;left:-5%;top:56%;border-bottom:0;border-left:0;border-right:0}
+  .road-two{width:55%;height:300px;left:40%;top:64%;border-bottom:0;border-right:0}
+  .map-sea-label{position:absolute;top:17%;left:12%;letter-spacing:.5em;font-size:.72rem;color:#557f80}
+  .map-pin{position:absolute;left:46%;top:43%;display:flex;flex-direction:column;align-items:center;color:var(--ink);gap:.3rem;transform:translate(-50%,-50%)}
+  .map-pin>svg{box-sizing:content-box;padding:14px;border-radius:50%;background:var(--ink);color:white;box-shadow:0 0 0 8px #ffffff55}
+  .map-pin strong{font-size:1.35rem;margin-top:.8rem;letter-spacing:-.03em}.map-pin small{font-size:.7rem}
+  .map-load{position:absolute;bottom:75px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:.7rem;white-space:nowrap;min-height:50px;padding:.8rem 1.2rem;border:1px solid #ffffffbb;border-radius:999px;background:var(--white);color:var(--ink);font-size:.75rem;cursor:pointer;box-shadow:0 8px 30px #15383b12;transition:background .2s,color .2s}
+  .map-load:hover{background:var(--ink);color:white}.map-preview-note{position:absolute;left:1.2rem;bottom:1rem;font-size:.6rem;color:#5e7470}
+  .map-frame iframe{position:absolute;inset:0;width:100%;height:100%;min-height:0;filter:none;z-index:2}.map-frame iframe[hidden]{display:none}
+  .map-external{position:absolute;right:1rem;top:1rem;z-index:3;display:flex;align-items:center;gap:.5rem;padding:.65rem .85rem;background:var(--white);border:1px solid var(--line);border-radius:99px;font-size:.65rem;box-shadow:0 2px 15px #15383b12}
+  .map-copy{padding:clamp(2rem,4vw,3.5rem)}.map-copy .kicker{margin:0 0 1.2rem}.map-copy h3{font-size:clamp(2.5rem,4vw,4rem);line-height:1.02;letter-spacing:-.055em}
+  .map-copy>p:not(.kicker){font-size:.85rem;line-height:1.8;margin:1.3rem 0}.map-detail{display:flex;gap:.8rem;align-items:center;margin:0 0 1.7rem;font-size:.78rem;line-height:1.7}.map-detail small{color:var(--muted);font-size:.7rem}.map-disclaimer{color:var(--muted);font-size:.65rem;margin-top:1rem}
+  .planning-help{background:#f0f3ed}.faq-layout{display:grid;grid-template-columns:.7fr 1.3fr;gap:clamp(3rem,8vw,8rem);align-items:start}
+  .faq-aside{padding:1.7rem 0}.faq-eyebrow{font-size:1.7rem;line-height:1.2;letter-spacing:-.045em}.faq-aside>p{max-width:30ch;color:var(--muted);font-size:.87rem;line-height:1.8;margin:1.2rem 0 1.5rem}.faq-aside>a{display:inline-flex;align-items:center;gap:1rem;font-size:.8rem;border-bottom:1px solid var(--ink);padding-bottom:.6rem}.faq-language{display:block;font-size:.65rem;color:var(--muted);margin-top:1rem}
+  .home-faq{min-width:0}.home-faq details{padding:0;border-bottom:1px solid #cfd9cf;overflow:hidden;transition:background .3s,border-color .3s}.home-faq details:first-child{border-top:1px solid #cfd9cf}.home-faq details[open]{background:#ffffff88}.home-faq summary{display:grid;grid-template-columns:28px minmax(0,1fr) 32px;gap:1.1rem;align-items:center;padding:1.5rem 1rem;list-style:none;font-size:.97rem;line-height:1.6;min-height:90px}.home-faq summary::-webkit-details-marker{display:none}.home-faq summary::marker{content:''}.faq-number{font-size:.65rem;color:var(--sea);font-weight:500;align-self:start;padding-top:.3rem}.faq-toggle{height:30px;width:30px;border:1px solid #cbd7cb;border-radius:50%;position:relative;transition:background .3s,border-color .3s,transform .35s}.faq-toggle:before,.faq-toggle:after{content:'';position:absolute;inset:50% auto auto 50%;width:10px;height:1px;background:var(--ink);transform:translate(-50%,-50%);transition:transform .35s,background .3s}.faq-toggle:after{transform:translate(-50%,-50%) rotate(90deg)}
+  details[open]:not(.is-closing) .faq-toggle{background:var(--ink);border-color:var(--ink)}details[open]:not(.is-closing) .faq-toggle:before,details[open]:not(.is-closing) .faq-toggle:after{background:white}details[open]:not(.is-closing) .faq-toggle:after{transform:translate(-50%,-50%) rotate(0)}.home-faq summary:hover .faq-toggle{transform:rotate(90deg)}
+  .faq-answer{padding:0 4rem 1.6rem 3.8rem}.home-faq .faq-answer p{margin:0;font-size:.86rem;line-height:1.85;max-width:62ch}
+  .journal-intro{display:flex;align-items:end;justify-content:space-between;gap:2rem;margin-top:6rem;padding-top:3rem;border-top:1px solid var(--line)}.journal-intro h3{font-size:clamp(2rem,4vw,3.5rem);line-height:1.08;letter-spacing:-.05em;font-weight:400;margin:1rem 0 0}.journal-intro>a{display:flex;align-items:center;gap:.8rem;font-size:.8rem;padding-bottom:.5rem;border-bottom:1px solid var(--ink)}
+  .journal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem;margin-top:2.5rem}.journal-card{display:block;border-radius:.9rem;overflow:hidden;background:var(--white);border:1px solid #e1e7de;transition:box-shadow .3s,transform .3s}.journal-image{position:relative;height:230px;overflow:hidden}.journal-image img{height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.22,1,.36,1)}.journal-index{position:absolute;top:1rem;left:1rem;font-size:.65rem;border:1px solid #ffffff66;border-radius:99px;padding:.4rem .55rem;background:#15383b66;color:white;backdrop-filter:blur(8px)}.journal-arrow{position:absolute;right:1rem;bottom:1rem;width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:white;color:var(--ink);transition:background .25s,color .25s,transform .3s}.journal-copy{padding:1.5rem}.journal-category{font-size:.59rem;letter-spacing:.13em;text-transform:uppercase;color:var(--sea)}.journal-copy h4{font-size:1.45rem;line-height:1.2;letter-spacing:-.04em;font-weight:500;margin:.8rem 0}.journal-copy p{font-size:.8rem;line-height:1.8;color:var(--muted);margin:0 0 1.5rem}.journal-read{display:flex;align-items:center;gap:.65rem;font-size:.7rem;padding-top:1rem;border-top:1px solid var(--line)}
+  @media(hover:hover){.destination-card:hover,.journal-card:hover{transform:translateY(-5px);box-shadow:0 16px 35px #15383b0c}.destination-card:hover img,.journal-card:hover img{transform:scale(1.04)}.journal-card:hover .journal-arrow{background:var(--ink);color:white;transform:rotate(-35deg)}}
+  @media(max-width:850px){.destination-grid{grid-template-columns:1fr;gap:1.5rem}.destination-card{display:grid;grid-template-columns:.9fr 1.1fr}.destination-image{height:100%;min-height:290px}.destination-copy{min-height:290px}.map-wrap{grid-template-columns:1fr}.map-frame{min-height:430px}.faq-layout{grid-template-columns:1fr;gap:1.5rem}.faq-aside{padding:0}.faq-aside br{display:none}.faq-aside>p{max-width:50ch}.journal-grid{gap:1rem}.journal-image{height:180px}.journal-copy{padding:1rem}.journal-copy h4{font-size:1.2rem}}
+  @media(max-width:560px){.destination-card{display:block}.destination-image{height:240px;min-height:0}.destination-copy{min-height:0}.destination-copy h3{font-size:1.4rem}.destination-note{font-size:.65rem}.map-frame{min-height:370px}.map-load{font-size:.67rem;gap:.4rem;max-width:calc(100% - 2rem);padding:.8rem 1rem;bottom:55px}.map-sea-label{font-size:.6rem}.map-copy{padding:2rem 1.5rem}.map-copy h3{font-size:3rem}.home-faq summary{padding:1.2rem .5rem;grid-template-columns:20px minmax(0,1fr) 28px;gap:.7rem;font-size:.87rem;min-height:88px}.faq-toggle{width:28px;height:28px}.faq-answer{padding:0 2.7rem 1.4rem 2.45rem}.home-faq .faq-answer p{font-size:.82rem}.journal-intro{margin-top:4rem;align-items:start;flex-direction:column;gap:1.3rem}.journal-grid{grid-template-columns:1fr}.journal-image{height:240px}.journal-copy{padding:1.4rem}.journal-copy h4{font-size:1.5rem}}
+  @media(prefers-reduced-motion:reduce){.destination-card,.destination-image img,.journal-card,.journal-image img,.journal-arrow,.faq-toggle,.faq-toggle:before,.faq-toggle:after,.home-faq details{transition:none}.destination-card:hover,.journal-card:hover,.destination-card:hover img,.journal-card:hover img,.journal-card:hover .journal-arrow,.home-faq summary:hover .faq-toggle{transform:none}}
+
 </style>

@@ -10,4 +10,8 @@ dist/
 Thumbs.db
 .vscode/
 .idea/
+output/
+tmp/
+AGENTS.md
+.project-local/
 
