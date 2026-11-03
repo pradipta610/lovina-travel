@@ -26,6 +26,11 @@ button, input { font: inherit; }
 img { display: block; width: 100%; }
 ::selection { background: var(--sun); color: var(--ink); }
 :focus-visible { outline: 2px solid var(--sea); outline-offset: 4px; }
+.article-body > p > a, .support-grid article p a, .guide-connection a, .image-note a { color: var(--sea); text-decoration: underline; text-underline-offset: 4px; }
+.guide-connection { padding-bottom: 1.5rem; font-size: .85rem; line-height: 1.8; color: var(--muted); }
+.journey-grid h3 a { text-decoration: underline; text-underline-offset: 5px; }
+.journey-grid h3 a:hover { color: var(--sea); }
+.collection-services { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; }
 .shell { width: calc(100% - 3rem); max-width: 1180px; margin-inline: auto; }
 .section { padding-block: clamp(5rem, 9vw, 8rem); }
 .kicker { margin: 0; font-size: .69rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase; color: var(--sea); }

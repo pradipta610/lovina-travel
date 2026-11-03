@@ -1,0 +1,17 @@
+.travel-service-page .hero-copy h1{font-size:clamp(3rem,5.4vw,5.3rem)}
+.service-image-note{font-size:.67rem;line-height:1.7;color:var(--muted);padding-bottom:2rem;margin-top:-1.5rem}
+.service-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
+.service-options article{padding:2rem;border:1px solid var(--line);border-radius:1rem;background:var(--white);display:flex;flex-direction:column;align-items:flex-start;scroll-margin-top:2rem}
+.service-options h3{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:400;line-height:1.15;letter-spacing:-.045em;margin:1.1rem 0}
+.service-options article>p:not(.kicker){font-size:.94rem;line-height:1.85;color:var(--muted);margin:0 0 1.4rem}
+.service-options ul{list-style:none;padding:0;margin:0 0 1.6rem;display:grid;gap:.85rem}
+.service-options li{display:flex;align-items:flex-start;gap:.7rem;font-size:.84rem;line-height:1.7;color:var(--muted)}
+.service-options li svg{flex-shrink:0;margin-top:.25rem;color:var(--sea)}
+.service-options .text-link{margin-top:auto}
+.service-related h2{font-size:clamp(2rem,4vw,3rem);font-weight:400;letter-spacing:-.045em;margin:1rem 0 2rem;line-height:1.1}
+.service-related>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.service-related>div>a{padding:1.5rem;border:1px solid var(--line);border-radius:.8rem;background:var(--white)}
+.service-related h3{display:flex;align-items:center;justify-content:space-between;gap:1rem;font-size:1rem;line-height:1.5;font-weight:500;margin:0 0 .8rem}
+.service-related h3 svg{flex-shrink:0}.service-related a:hover h3{text-decoration:underline;text-underline-offset:4px}
+.service-related p{font-size:.85rem;line-height:1.8;color:var(--muted);margin:0}
+@media(max-width:650px){.travel-service-page .hero-copy h1{font-size:clamp(3rem,11.5vw,4.2rem)}.service-options,.service-related>div{grid-template-columns:minmax(0,1fr)}.service-options article{padding:1.5rem}.service-image-note{margin-top:0;padding-bottom:1.5rem}}

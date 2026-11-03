@@ -1,4 +1,5 @@
 ---
+import SiteFooter from '../components/SiteFooter.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { ArrowRight, BusFront, Check, MapPin, Menu, ShipWheel, Sparkles, X } from 'lucide-astro';
 
@@ -60,7 +61,7 @@ const pageData = {
         {tours.map((tour) => (
           <article class:list={['tour-card reveal', { featured: tour.number === '02' }]}>
             <div class="card-top"><span>{tour.number}</span></div>
-            <h3>{tour.title}</h3><p class="price">{tour.price}</p><p class="card-note">{tour.note}</p>
+            <h3><a href="/dolphin-tour-lovina/#boats">{tour.title}</a></h3><p class="price">{tour.price}</p><p class="card-note">{tour.note}</p>
             <ul>{tour.items.map((item) => <li><Check size={15}/>{item}</li>)}</ul>
             <a href={whatsappUrl}>Ask about this tour <ArrowRight size={14}/></a>
           </article>
@@ -73,7 +74,7 @@ const pageData = {
         <div class="private-image reveal"><img src="/images/lovina-sunrise.png" alt="A private traditional boat on the calm Lovina Sea" loading="lazy" /><span>A boat for your group.</span></div>
         <div class="private-copy reveal"><p class="kicker">Private boat</p><h2 class="title">A quieter way<br/>to go.</h2><p class="lede">A boat for your own group rather than a shared departure. Tell Ayu your group size and ask which package, schedule, and inclusions are available.</p>
           <div class="rate-list">{privateRates.map(([group, rate]) => <div><span>{group}</span><strong>{rate}</strong></div>)}</div>
-          <a class="button" href={whatsappUrl}>Book a private boat <ArrowRight size={14}/></a>
+          <a class="button" href="/dolphin-tour-lovina/#boats">Explore private boat options <ArrowRight size={14}/></a>
         </div>
       </div>
     </section>
@@ -81,19 +82,19 @@ const pageData = {
     <section class="transport section" id="transport">
       <div class="shell section-heading reveal"><div><p class="kicker">On the road</p><h2 class="title">Private &amp; group transport.</h2></div><p class="lede">Private cars, Hiace, and Elf serving Lovina, Singaraja, Negara, Denpasar, and airport transfers. Long-term car and motorbike rentals are also available.</p></div>
       <div class="shell transport-grid">
-        <article class="transport-card reveal"><BusFront size={24}/><h3>Private car</h3><p>Terios, Avanza, Xpander, or Xenia for solo travellers, couples, and families. A female driver may be requested, subject to availability.</p></article>
-        <article class="transport-card reveal"><ShipWheel size={24}/><h3>HiAce or ELF</h3><p>Hiace seats up to 15 passengers plus a driver; Elf seats up to 19 plus a driver. For group outings, arisan, and tirta yatra.</p></article>
-        <article class="transport-card reveal"><Sparkles size={24}/><h3>Long-term rentals</h3><p>Car and motorbike rentals for longer stays. Contact Ayu for availability, rental terms, and pricing.</p></article>
+        <article class="transport-card reveal"><BusFront size={24}/><h3>Private car</h3><p>Terios, Avanza, Xpander, or Xenia for solo travellers, couples, and families. A female driver may be requested, subject to availability.</p><a class="transport-link" href="/transportasi/sewa-mobil-singaraja/">Explore private car transport <ArrowRight size={14}/></a></article>
+        <article class="transport-card reveal"><ShipWheel size={24}/><h3>HiAce or ELF</h3><p>Hiace seats up to 15 passengers plus a driver; Elf seats up to 19 plus a driver. For group outings, arisan, and tirta yatra.</p><a class="transport-link" href="/transportasi/rombongan/">Explore group transport <ArrowRight size={14}/></a></article>
+        <article class="transport-card reveal"><Sparkles size={24}/><h3>Long-term rentals</h3><p>Car and motorbike rentals for longer stays. Contact Ayu for availability, rental terms, and pricing.</p><a class="transport-link" href="/sewa-kendaraan-jangka-panjang/">Explore long-term car &amp; motorbike rental <ArrowRight size={14}/></a></article>
       </div>
-      <div class="shell route-table reveal"><div class="table-title"><span class="kicker">Popular routes</span><span>Pricing</span></div>{routes.map(([route, price]) => <div class="route-row"><span>{route}</span><strong>{price}</strong></div>)}<p>Share your pickup point, destination, date, and group size for a transport quote.</p></div>
+      <div class="shell route-table reveal"><div class="table-title"><span class="kicker">Popular routes</span><span>Pricing</span></div>{routes.map(([route, price]) => <div class="route-row"><span>{route}</span><strong>{price}</strong></div>)}<p>Share your pickup point, destination, date, and group size for a transport quote.</p><a class="transport-link" href="/transportasi/">Explore Lovina &amp; Singaraja transport <ArrowRight size={14}/></a></div>
     </section>
 
     <section class="section local-trips" id="local-trips">
       <div class="shell section-heading"><div><p class="kicker">Beyond the sea</p><h2 class="title">Plan a day in<br/>North Bali.</h2></div><p class="lede">Ask Bu Ayu about local routes, transport, and hotel or villa recommendations. Choose your stops together before confirming an itinerary.</p></div>
       <div class="shell destination-grid">
-        <article class="destination-card"><div class="destination-image"><img src="/images/family-transport.webp" alt="A family vehicle for exploring North Bali" loading="lazy"/><span class="destination-tag">01 / Culture &amp; local life</span></div><div class="destination-copy"><h3>Singaraja</h3><p>Local markets, Sasana Budaya, Chinese Temple, and Beji Temple. Plan the stops and pace with Ayu.</p><a href={whatsappUrl}>Plan this route <span class="card-arrow"><ArrowRight size={17}/></span></a></div></article>
-        <article class="destination-card"><div class="destination-image"><img src="/images/hidden-waterfall.png" alt="Waterfall scenery as inspiration for a North Bali day trip" loading="lazy"/><span class="destination-tag">02 / Springs &amp; waterfalls</span></div><div class="destination-copy"><h3>Banjar &amp; waterfalls</h3><p>Ask about Banjar Hot Spring, Buddhist Temple, or a visit to Sekumpul. Choose a route that fits your day.</p><a href={whatsappUrl}>Explore your options <span class="card-arrow"><ArrowRight size={17}/></span></a></div></article>
-        <article class="destination-card"><div class="destination-image"><img src="/images/lovina-sunrise.png" alt="A quiet morning in North Bali before an inland day trip" loading="lazy"/><span class="destination-tag">03 / An inland escape</span></div><div class="destination-copy"><h3>Aling-Aling &amp; beyond</h3><p>Discuss Aling-Aling and an onward route through Munduk toward Ulun Danu Bratan. Confirm timing with Ayu.</p><a href={whatsappUrl}>Shape your day <span class="card-arrow"><ArrowRight size={17}/></span></a></div></article>
+        <article class="destination-card"><div class="destination-image"><img src="/images/family-transport.webp" alt="A family vehicle for exploring North Bali" loading="lazy"/><span class="destination-tag">01 / Culture &amp; local life</span></div><div class="destination-copy"><h3>Singaraja</h3><p>Local markets, Sasana Budaya, Chinese Temple, and Beji Temple. Plan the stops and pace with Ayu.</p><a href="/tur-bali-utara/#singaraja">Plan a Singaraja tour <span class="card-arrow"><ArrowRight size={17}/></span></a></div></article>
+        <article class="destination-card"><div class="destination-image"><img src="/images/hidden-waterfall.png" alt="Waterfall scenery as inspiration for a North Bali day trip" loading="lazy"/><span class="destination-tag">02 / Springs &amp; waterfalls</span></div><div class="destination-copy"><h3>Banjar &amp; waterfalls</h3><p>Ask about Banjar Hot Spring, Buddhist Temple, or a visit to Sekumpul. Choose a route that fits your day.</p><a href="/tur-bali-utara/#banjar">Explore Banjar &amp; tour options <span class="card-arrow"><ArrowRight size={17}/></span></a></div></article>
+        <article class="destination-card"><div class="destination-image"><img src="/images/lovina-sunrise.png" alt="A quiet morning in North Bali before an inland day trip" loading="lazy"/><span class="destination-tag">03 / An inland escape</span></div><div class="destination-copy"><h3>Aling-Aling &amp; beyond</h3><p>Discuss Aling-Aling and an onward route through Munduk toward Ulun Danu Bratan. Confirm timing with Ayu.</p><a href="/tur-bali-utara/#aling-aling-munduk">Discuss the inland tour route <span class="card-arrow"><ArrowRight size={17}/></span></a></div></article>
       </div>
       <p class="shell destination-note">A little inspiration for your route. Images are illustrative; stops and itinerary are agreed with Ayu.</p>
     </section>
@@ -155,7 +156,7 @@ const pageData = {
     <section class="contact section" id="contact"><div class="shell contact-inner reveal"><p class="kicker">Start here</p><h2>Tell us when you’re coming.</h2><p>Send your date, number of guests, pickup location, and the experience you want. We’ll help with the rest.</p><a class="button contact-button" href={whatsappUrl}>Chat with Bu Ayu <ArrowRight size={15}/></a><p class="contact-details"><a href={whatsappUrl}>{business.phone}</a><br/>Indonesian &amp; English · <a href={business.instagramUrl} target="_blank" rel="noreferrer">{business.instagramHandle}</a></p></div></section>
   </main>
 
-  <footer class="site-footer"><div class="shell footer-inner"><a class="brand footer-brand" href="#top"><span class="brand-mark">U</span><span>Utami Mesari Tours<small>Lovina · North Bali</small></span></a><p>Dolphin tours & transport · Lovina, North Bali.</p><span>© 2026 Utami Mesari Tours</span></div></footer>
+  <SiteFooter />
 
   <p class="page-updated shell">Last updated: <time datetime={updatedAt}>25 October 2026</time></p>
 
@@ -204,6 +205,7 @@ const pageData = {
 </BaseLayout>
 
 <style>
+  .transport-link{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.2rem;font-size:.75rem;text-decoration:underline;text-underline-offset:4px}
   .hero-copy h1.brand-heading{font-size:clamp(3.5rem,9vw,8rem);line-height:.94;letter-spacing:-.06em;overflow-wrap:normal}.brand-heading span{display:block;font-size:.56em;letter-spacing:-.035em;margin-top:.2em}.local-trips{background:var(--white)}.booking-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;list-style:decimal-leading-zero;padding-left:2rem}.booking-steps li{padding-left:.5rem}.booking-steps h3,.reading-links h3{font-size:1.1rem}.booking-steps p,.home-faq p{font-size:.9rem;line-height:1.75;color:var(--muted)}.home-faq details{padding:1.2rem 0;border-bottom:1px solid var(--line)}.home-faq summary{cursor:pointer;font-weight:500;line-height:1.6}.home-faq p{max-width:75ch}.reading-links{margin-top:3rem;display:grid;gap:1rem}.reading-links a{display:flex;align-items:center;gap:.7rem;text-decoration:underline;text-underline-offset:4px;font-size:.9rem}.page-updated{font-size:.75rem;color:var(--muted);padding-bottom:1.5rem}.booking-steps li::marker{color:var(--sea);font-weight:600}
   @media(max-width:850px){.booking-steps{grid-template-columns:1fr;gap:1rem}.hero-copy h1.brand-heading{font-size:clamp(3.2rem,10vw,5.5rem)}}
 

@@ -1,4 +1,5 @@
 ---
+import SiteFooter from '../../components/SiteFooter.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/blog-layout.css';
 import { ArrowLeft, ArrowRight, Clock3 } from 'lucide-astro';
@@ -11,6 +12,12 @@ const { post } = Astro.props;
 const guide = dolphinGuides[post.slug];
 const displayHeading = guide?.displayHeading ?? post.title;
 const subtitle = guide?.subtitle;
+const isDayGuide = post.slug === 'a-slow-day-in-north-bali';
+const contextLinks = [
+  { phrase: 'a morning on the sea', href: '/dolphin-tour-lovina/' },
+  { phrase: 'the drive itself', href: '/transportasi/sewa-mobil-singaraja/' },
+  { phrase: 'the best route', href: '/tur-bali-utara/#itinerary' },
+];
 const recommendedPosts = posts.filter(item => item.slug !== post.slug)
   .sort((a, b) => Number(b.slug === guide?.relatedSlug) - Number(a.slug === guide?.relatedSlug));
 const articleData = {
@@ -40,20 +47,25 @@ const articleData = {
           {guide.sections.map(section=><section class="guide-section" id={section.id}><h2>{section.title}</h2><div set:html={section.html}/></section>)}
           <section class="guide-sources"><h2>Sources &amp; service information</h2><p>Tour arrangements here describe Utami Mesari Tours. Bu Ayu is the owner and booking contact; this article is not presented as her personal trip review. Package details are confirmed directly before payment. External sources below provide general context, not our prices or inclusions.</p><ul>{guide.sources.map(source=><li><a href={source.url} target="_blank" rel="noreferrer">{source.label}</a><p>{source.note}</p></li>)}</ul><p>External sources checked: 1 November 2026. <a href="/dolphin-tour-lovina/#what-you-get">See our tour arrangements and optional extras</a>.</p></section>
           <section class="related-guide"><p class="kicker">Continue planning</p><h2><a href={`/blog/${guide.relatedSlug}`}>{guide.relatedTitle} <ArrowRight size={18}/></a></h2></section>
-        </> : post.body.map((paragraph) => <p>{paragraph}</p>)}
-        <aside><p>Ready to discuss your date and boat?</p><a href="/dolphin-tour-lovina/">Explore our Lovina dolphin tour <ArrowRight size={14}/></a></aside>
+        </> : post.body.map((paragraph) => {
+          const link = contextLinks.find(item => paragraph.includes(item.phrase));
+          if (!link) return <p>{paragraph}</p>;
+          const start = paragraph.indexOf(link.phrase);
+          return <p>{paragraph.slice(0, start)}<a href={link.href}>{link.phrase}</a>{paragraph.slice(start + link.phrase.length)}</p>;
+        })}
+        <aside><p>{isDayGuide ? 'Ready to plan the journey?' : 'Ready to discuss your date and boat?'}</p><a href={isDayGuide ? '/transportasi/' : '/dolphin-tour-lovina/'}>{isDayGuide ? 'Explore Lovina & Singaraja transport' : 'Explore our Lovina dolphin tour'} <ArrowRight size={14}/></a></aside>
       </div>
       <aside class="article-sidebar" aria-label="Recommended articles">
         <div class="sidebar-sticky">
           <p class="kicker">Keep exploring</p><h2>Recommended<br/>reading.</h2>
           <div class="sidebar-articles">{recommendedPosts.map(item => <a class="sidebar-card" href={`/blog/${item.slug}`}><img src={item.image} alt="" loading="lazy"/><div><span>{item.category}</span><h3>{dolphinGuides[item.slug]?.displayHeading ?? item.title}</h3><small>Read article <ArrowRight size={13}/></small></div></a>)}</div>
-          <a class="sidebar-service" href="/dolphin-tour-lovina/"><span>Ready for the sea?</span><strong>Explore our dolphin tour <ArrowRight size={15}/></strong></a>
+          <a class="sidebar-service" href={isDayGuide ? '/transportasi/' : '/dolphin-tour-lovina/'}><span>{isDayGuide ? 'Plan the route' : 'Ready for the sea?'}</span><strong>{isDayGuide ? 'Explore transport options' : 'Explore our dolphin tour'} <ArrowRight size={15}/></strong></a>
         </div>
       </aside>
       </div>
     </article>
   </main>
-  <footer><a href="/blog"><ArrowLeft size={14}/> More stories from North Bali</a></footer>
+  <SiteFooter />
 </BaseLayout>
 <style>
   .article-head .article-updated{font-size:.72rem;line-height:1.7;margin:1.2rem 0 0;color:var(--muted)}.quick-answer{padding:1.8rem;border-left:3px solid var(--sea);background:var(--mist);border-radius:0 .8rem .8rem 0}.quick-answer>p:last-child{font-size:1.03rem;line-height:1.85;margin:1rem 0 0}.article-contents{margin:2.5rem 0 3.5rem;border-block:1px solid var(--line);padding:1.5rem 0}.article-contents h2{font-size:1rem;font-weight:500;margin:0 0 1rem}.article-contents ol{margin:0;padding-left:1.3rem;display:grid;gap:.7rem}.article-contents a{font-size:.85rem;line-height:1.6;text-decoration:underline;text-underline-offset:4px}.guide-section{scroll-margin-top:2rem;margin:3rem 0}.guide-section h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:500;line-height:1.22;letter-spacing:-.035em;margin:0 0 1.3rem}.guide-section :global(p),.guide-section :global(li){font-size:1rem;line-height:1.85;color:#3f5557}.guide-section :global(p){margin:0 0 1.2rem}.guide-section :global(li){margin:.6rem 0}.guide-section :global(a),.guide-sources a{text-decoration:underline;text-underline-offset:4px;color:var(--sea)}.guide-section :global(.comparison-scroll){overflow-x:auto;border:1px solid var(--line);border-radius:.8rem;margin:1.5rem 0}.guide-section :global(table){border-collapse:collapse;width:100%;min-width:480px;font-size:.83rem;line-height:1.7}.guide-section :global(caption){padding:1rem;text-align:left;font-size:.75rem;color:var(--muted);background:var(--mist)}.guide-section :global(th),.guide-section :global(td){padding:.9rem 1rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}.guide-section :global(thead th){background:var(--ink);color:white;font-weight:500}.guide-section :global(tbody th){font-weight:500;width:30%;background:#edf2eb}.guide-sources{border-top:1px solid var(--line);padding-top:2rem;margin-top:3rem}.guide-sources h2{font-size:1.3rem;font-weight:500}.guide-sources p,.guide-sources li{font-size:.8rem;line-height:1.8;color:var(--muted)}.guide-sources ul{padding-left:1.1rem}.related-guide{margin:2.5rem 0;padding:1.7rem;background:white;border:1px solid var(--line);border-radius:1rem}.related-guide h2{font-size:1.3rem;line-height:1.4;font-weight:500;margin:1rem 0 0}.related-guide h2 a{display:flex;gap:1rem;align-items:center;justify-content:space-between}aside a{width:auto;max-width:100%}

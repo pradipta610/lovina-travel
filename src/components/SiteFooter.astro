@@ -1,0 +1,35 @@
+---
+interface Props { updated?: string; updatedLabel?: string }
+const { updated, updatedLabel } = Astro.props;
+const groups = [
+  { label: 'On the sea', links: [
+    { href: '/dolphin-tour-lovina/', label: 'Lovina dolphin tour' },
+    { href: '/blog/sharing-or-private-boat', label: 'Private vs sharing boats' },
+    { href: '/blog/best-time-to-see-dolphins-in-lovina', label: 'Dolphin tour preparation' },
+  ] },
+  { label: 'On the road', links: [
+    { href: '/transportasi/', label: 'Lovina & Singaraja transport' },
+    { href: '/transportasi/sewa-mobil-singaraja/', label: 'Private car transport' },
+    { href: '/transportasi/rombongan/', label: 'Hiace & Elf group transport' },
+    { href: '/sewa-kendaraan-jangka-panjang/', label: 'Long-term car & motorbike rental' },
+  ] },
+  { label: 'Explore North Bali', links: [
+    { href: '/tur-bali-utara/', label: 'North Bali tour options' },
+    { href: '/blog', label: 'Travel journal' },
+    { href: '/blog/a-slow-day-in-north-bali', label: 'A slow day in North Bali' },
+    { href: '/gallery', label: 'Tour & transport gallery' },
+  ] },
+];
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<footer class="site-directory">
+  <div class="shell directory-grid">
+    <div class="directory-brand"><a href="/">Utami Mesari Tours</a><p>Dolphin tours &amp; transport.<br/>Lovina · North Bali.</p><a class="directory-about" href="/#about">Meet Bu Ayu</a></div>
+    {groups.map(group => <nav aria-label={group.label}><h2>{group.label}</h2><ul>{group.links.map(link => <li>{(link.href.replace(/\/$/, '') || '/') === current ? <span aria-current="page">{link.label}</span> : <a href={link.href}>{link.label}</a>}</li>)}</ul></nav>)}
+  </div>
+  <div class="shell directory-bottom"><small>© 2026 Utami Mesari Tours</small>{updated && <small>Last updated: <time datetime={updated}>{updatedLabel}</time></small>}<a href="/#contact">Contact &amp; trip enquiries</a></div>
+</footer>
+<style>
+  .site-directory{display:block;padding:3rem 0 2rem;background:var(--white);color:var(--ink);border-top:1px solid var(--line);text-align:left;width:100%;max-width:none;margin:0}.site-directory .directory-grid{display:grid;grid-template-columns:1.2fr repeat(3,minmax(0,1fr));gap:2.5rem;align-items:start}.directory-brand>a:first-child{display:inline;font-size:1rem;font-weight:600;letter-spacing:-.03em}.directory-brand p{font-size:.78rem;line-height:1.8;color:var(--muted);margin:1rem 0}.site-directory .directory-about{font-size:.74rem;text-decoration:underline;text-underline-offset:4px}.directory-grid nav h2{font-size:.66rem;line-height:1.6;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--sea);margin:0 0 1rem}.directory-grid ul{display:grid;gap:.8rem;list-style:none;padding:0;margin:0}.directory-grid li{font-size:.76rem;line-height:1.65}.site-directory a{width:auto;max-width:100%;line-height:1.65}.directory-grid li a:hover,.directory-bottom a:hover{text-decoration:underline;text-underline-offset:4px}.directory-grid li span{color:var(--muted)}.site-directory .directory-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--line);font-size:.68rem;color:var(--muted)}.directory-bottom small{font-size:inherit}.directory-bottom a{font-size:inherit}
+  @media(max-width:900px){.site-directory .directory-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem}}@media(max-width:520px){.site-directory{padding-bottom:5rem}.site-directory .directory-grid{grid-template-columns:minmax(0,1fr);gap:2rem}.site-directory .directory-bottom{flex-direction:column;align-items:flex-start}}
+</style>
